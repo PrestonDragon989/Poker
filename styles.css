@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+}
+
+#poker-canvas {
+    /* Fitting to screen */
+    width: 100vw; 
+    height: 100vh;
+
+    /* Backround Styling */
+    background-color: rgb(90, 204, 111);
+
+    z-index: 1;
+}
