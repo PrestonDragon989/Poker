@@ -5,13 +5,29 @@ body {
     overflow: hidden;
 }
 
+#poker-container {
+    position: relative;
+}
+
 #poker-canvas {
     /* Fitting to screen */
     width: 100vw; 
     height: 100vh;
 
     /* Backround Styling */
-    background-color: rgb(90, 204, 111);
+    background-color: rgb(69, 188, 90);
 
+    z-index: 2;
+}
+
+#player-card-canvas {
+    position: fixed;
+    bottom: -1%; /* Adjust this value to cut off a bit of the bottom */
+    left: 7.5%;
+    width: 27.5vw;
+    height: 12vw;
+    border-radius: 4%;
+    border: 2px solid rgb(2, 18, 0);
+    background-color: rgb(20, 175, 0);
     z-index: 1;
 }

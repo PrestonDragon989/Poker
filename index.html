@@ -10,12 +10,13 @@
         <link rel="shortcut icon" href="card-images/misc/favicon.png" type="image/x-icon">
 
         <!-- Scripst -->
-        <script src="scripts/deck.js"></script>
-        <script src="game.js"></script>
+        <script src="scripts/deck.mjs" type="module"></script>
+        <script src="game.js" type="module"></script>
     </head>
     <body>
         <div id="poker-container">
-            <canvas id="poker-canvas" width="1024" height="576"></canvas>            
+            <canvas id="poker-canvas" width="1024" height="576"></canvas>
+            <canvas id="player-card-canvas" width="281" height="85""></canvas>        
         </div>        
     </body>
 </html>

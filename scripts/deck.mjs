@@ -3,6 +3,70 @@ class CardDeck {
         // Deck size
         this.size = size;
 
+        // Card Sprites
+        this.cardSprites = {
+            clubs: {
+                ace: new Image(),
+                two: new Image(),
+                three: new Image(),
+                four: new Image(),
+                five: new Image(),
+                six: new Image(),
+                seven: new Image(),
+                eight: new Image(),
+                nine: new Image(),
+                ten: new Image(),
+                jack: new Image(),
+                queen: new Image(),
+                king: new Image()
+            },
+            spades: {
+                ace: new Image(),
+                two: new Image(),
+                three: new Image(),
+                four: new Image(),
+                five: new Image(),
+                six: new Image(),
+                seven: new Image(),
+                eight: new Image(),
+                nine: new Image(),
+                ten: new Image(),
+                jack: new Image(),
+                queen: new Image(),
+                king: new Image()
+            },
+            hearts: {
+                ace: new Image(),
+                two: new Image(),
+                three: new Image(),
+                four: new Image(),
+                five: new Image(),
+                six: new Image(),
+                seven: new Image(),
+                eight: new Image(),
+                nine: new Image(),
+                ten: new Image(),
+                jack: new Image(),
+                queen: new Image(),
+                king: new Image()
+            },
+            diamonds: {
+                ace: new Image(),
+                two: new Image(),
+                three: new Image(),
+                four: new Image(),
+                five: new Image(),
+                six: new Image(),
+                seven: new Image(),
+                eight: new Image(),
+                nine: new Image(),
+                ten: new Image(),
+                jack: new Image(),
+                queen: new Image(),
+                king: new Image()
+            }
+        }
+
         // Total Card deck
         this.allCards = [ // Diamonds, Spades, Clubs, Hearts
             [1, "diamond", "card-images/diamond-cards/ace-diamond.png"], [2, "diamond", "card-images/diamond-cards/two-diamond.png"], [3, "diamond", "card-images/diamond-cards/three-diamond.png"], [4, "diamond", "card-images/diamond-cards/four-diamond.png"], [5, "diamond", "card-images/diamond-cards/five-diamond.png"], [6, "diamond", "card-images/diamond-cards/six-diamond.png"], [7, "diamond", "card-images/diamond-cards/seven-diamond.png"], [8, "diamond", "card-images/diamond-cards/eight-diamond.png"], [9, "diamond", "card-images/diamond-cards/nine-diamond.png"], [10, "diamond", "card-images/diamond-cards/ten-diamond.png"], [11, "diamond", "card-images/diamond-cards/jack-diamond.png"], [12, "diamond", "card-images/diamond-cards/queen-diamond.png"], [13, "diamond", "card-images/diamond-cards/king-diamond.png"],
@@ -20,6 +84,9 @@ class CardDeck {
 
         // Cards currently on the table
         this.tableCards = [];
+
+        // Loading Sprites
+        this.loadCardSprites();
     }
 
     // Card Management functions (set deck, shuffle deck, deal cards, etc. . .)
@@ -66,4 +133,38 @@ class CardDeck {
             this.tableCards.push(this.dealCard());
         }
     }
+
+    // Setting up Card Sprites
+    loadCardSprites() {
+        // Loading Club Sprites
+        this.cardSprites.clubs.ace.src = "card-images/club-cards/ace-club.png";
+        this.cardSprites.clubs.two.src = "card-images/club-cards/two-club.png";
+        this.cardSprites.clubs.three.src = "card-images/club-cards/three-club.png";
+        this.cardSprites.clubs.four.src = "card-images/club-cards/four-club.png";
+        this.cardSprites.clubs.five.src = "card-images/club-cards/five-club.png";
+        this.cardSprites.clubs.six.src = "card-images/club-cards/six-club.png";
+        this.cardSprites.clubs.seven.src = "card-images/club-cards/seven-club.png";
+        this.cardSprites.clubs.eight.src = "card-images/club-cards/eight-club.png";
+        this.cardSprites.clubs.nine.src = "card-images/club-cards/nine-club.png";
+        this.cardSprites.clubs.ten.src = "card-images/club-cards/ten-club.png";
+        this.cardSprites.clubs.jack.src = "card-images/club-cards/jack-club.png";
+        this.cardSprites.clubs.queen.src = "card-images/club-cards/queen-club.png";
+        this.cardSprites.clubs.king.src = "card-images/club-cards/king-club.png";
+
+        // Loading Spade Sprites
+        this.cardSprites.spades.ace.src = "card-images/spade-cards/ace-spade.png";
+        this.cardSprites.spades.two.src = "card-images/spade-cards/two-spade.png";
+        this.cardSprites.spades.three.src = "card-images/spade-cards/three-spade.png";
+        this.cardSprites.spades.four.src = "card-images/spade-cards/four-spade.png";
+        this.cardSprites.spades.five.src = "card-images/spade-cards/five-spade.png";
+        this.cardSprites.spades.six.src = "card-images/spade-cards/six-spade.png";
+        this.cardSprites.spades.seven.src = "card-images/spade-cards/seven-spade.png";
+        this.cardSprites.spades.eight.src = "card-images/spade-cards/eight-spade.png";
+        this.cardSprites.spades.nine.src = "card-images/spade-cards/nine-spade.png";
+        this.cardSprites.spades.ten.src = "card-images/spade-cards/ten-spade.png";
+        this.cardSprites.spades.jack.src = "card-images/spade-cards/jack-spade.png";
+        this.cardSprites.spades.queen.src = "card-images/spade-cards/queen-spade.png";
+        this.cardSprites.spades.king.src = "card-images/spade-cards/king-spade.png";
+    }
 }
+export default CardDeck;
