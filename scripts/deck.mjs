@@ -165,6 +165,36 @@ class CardDeck {
         this.cardSprites.spades.jack.src = "card-images/spade-cards/jack-spade.png";
         this.cardSprites.spades.queen.src = "card-images/spade-cards/queen-spade.png";
         this.cardSprites.spades.king.src = "card-images/spade-cards/king-spade.png";
+
+        // Heart Card Sources
+        this.cardSprites.hearts.ace.src = "card-images/heart-cards/ace-heart.png";
+        this.cardSprites.hearts.two.src = "card-images/heart-cards/two-heart.png";
+        this.cardSprites.hearts.three.src = "card-images/heart-cards/three-heart.png";
+        this.cardSprites.hearts.four.src = "card-images/heart-cards/four-heart.png";
+        this.cardSprites.hearts.five.src = "card-images/heart-cards/five-heart.png";
+        this.cardSprites.hearts.six.src = "card-images/heart-cards/six-heart.png";
+        this.cardSprites.hearts.seven.src = "card-images/heart-cards/seven-heart.png";
+        this.cardSprites.hearts.eight.src = "card-images/heart-cards/eight-heart.png";
+        this.cardSprites.hearts.nine.src = "card-images/heart-cards/nine-heart.png";
+        this.cardSprites.hearts.ten.src = "card-images/heart-cards/ten-heart.png";
+        this.cardSprites.hearts.jack.src = "card-images/heart-cards/jack-heart.png";
+        this.cardSprites.hearts.queen.src = "card-images/heart-cards/queen-heart.png";
+        this.cardSprites.hearts.king.src = "card-images/heart-cards/king-heart.png";
+
+        // Diamond Card Sources
+        this.cardSprites.diamonds.ace.src = "card-images/diamond-cards/ace-diamond.png";
+        this.cardSprites.diamonds.two.src = "card-images/diamond-cards/two-diamond.png";
+        this.cardSprites.diamonds.three.src = "card-images/diamond-cards/three-diamond.png";
+        this.cardSprites.diamonds.four.src = "card-images/diamond-cards/four-diamond.png";
+        this.cardSprites.diamonds.five.src = "card-images/diamond-cards/five-diamond.png";
+        this.cardSprites.diamonds.six.src = "card-images/diamond-cards/six-diamond.png";
+        this.cardSprites.diamonds.seven.src = "card-images/diamond-cards/seven-diamond.png";
+        this.cardSprites.diamonds.eight.src = "card-images/diamond-cards/eight-diamond.png";
+        this.cardSprites.diamonds.nine.src = "card-images/diamond-cards/nine-diamond.png";
+        this.cardSprites.diamonds.ten.src = "card-images/diamond-cards/ten-diamond.png";
+        this.cardSprites.diamonds.jack.src = "card-images/diamond-cards/jack-diamond.png";
+        this.cardSprites.diamonds.queen.src = "card-images/diamond-cards/queen-diamond.png";
+        this.cardSprites.diamonds.king.src = "card-images/diamond-cards/king-diamond.png";
     }
 }
 export default CardDeck;
