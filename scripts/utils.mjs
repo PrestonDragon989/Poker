@@ -1,3 +1,4 @@
+// simple Shape Drawing Functions
 function drawHollowRoundedRect(ctx, x, y, width, height, roundedNess, borderColor, borderWidth) {
     ctx.beginPath();
     ctx.moveTo(x + roundedNess, y);
@@ -21,6 +22,18 @@ function drawFilledRoundedRect(ctx, x, y, width, height, roundedNess, fillColor)
     ctx.fillStyle = fillColor;
     ctx.fill();
 }
+function drawHollowRect(ctx, x, y, width, height, borderColor, borderWidth) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + width, y);
+    ctx.lineTo(x + width, y + height);
+    ctx.lineTo(x, y + height);
+    ctx.closePath();
+    ctx.strokeStyle = borderColor;
+    ctx.lineWidth = borderWidth;
+    ctx.stroke();
+}
+
 
 // Drawing Skeleton features of the table
 function drawBasePlayerCardPlatform(ctx) {
@@ -33,7 +46,7 @@ function drawBaseTableCardPlatform(ctx) {
     drawHollowRoundedRect(ctx, 287, 20, 450, 125, 5, "rgb(24, 82, 24)", 5);
 }
 
-// Draw Cards for hands
+// Draw Cards for hands / Table
 function drawPlayerCards(ctx, deck) {
     let cardOne = deck.playerHand[0];
     let cardTwo = deck.playerHand[1];
@@ -41,5 +54,21 @@ function drawPlayerCards(ctx, deck) {
     ctx.drawImage(cardOne[2], 62, 414, 105, 150);
     ctx.drawImage(cardTwo[2], 182, 414, 105, 150);
 }
+function drawTableCards(ctx, deck) {
+    for (let i = 0; i < deck.tableCards.length; i++) {
+        ctx.drawImage(deck.tableCards[i][2], 301 + (87 * i), 32, 70, 100); // 287, 20, 70, 100
+        console.log(deck.tableCards[i], " Sup ");
+    };
+}
+function drawTableCardSpots(ctx) {
+    for (let i = 0; i < 5; i++) {
+        drawHollowRect(ctx, 301 + (87 * i), 32, 70, 100, "rgb(7, 79, 20)", 1);
+    };
+}
+function drawCompleteTable(ctx, deck) {
+    drawBaseTableCardPlatform(ctx)
+    drawTableCardSpots(ctx);
+    drawTableCards(ctx, deck);
+}
 
-export {drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform, drawPlayerCards};
+export {drawCompleteTable, drawTableCardSpots, drawTableCards, drawHollowRect, drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform, drawPlayerCards};
