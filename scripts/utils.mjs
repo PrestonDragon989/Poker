@@ -65,10 +65,16 @@ function drawTableCardSpots(ctx) {
         drawHollowRect(ctx, 301 + (87 * i), 32, 70, 100, "rgb(7, 79, 20)", 1);
     };
 }
+
+// Total Card Drawing Functions
 function drawCompleteTable(ctx, deck) {
     drawBaseTableCardPlatform(ctx)
     drawTableCardSpots(ctx);
     drawTableCards(ctx, deck);
 }
+function drawCompletePlayerCards(ctx, deck) {
+    drawBasePlayerCardPlatform(ctx);
+    drawPlayerCards(ctx, deck);
+}
 
-export {drawCompleteTable, drawTableCardSpots, drawTableCards, drawHollowRect, drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform, drawPlayerCards};
+export {drawCompletePlayerCards, drawCompleteTable, drawTableCardSpots, drawTableCards, drawHollowRect, drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform, drawPlayerCards};

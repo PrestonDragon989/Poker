@@ -1,6 +1,6 @@
 // Importing Deck
 import CardDeck from "./scripts/deck.mjs";
-import {drawHollowRect, drawPlayerCards, drawBaseTableCardPlatform, drawBasePlayerCardPlatform, drawFilledRoundedRect, drawHollowRoundedRect, drawTableCards, drawTableCardSpots, drawCompleteTable} from "./scripts/utils.mjs"; 
+import {drawHollowRect, drawPlayerCards, drawBaseTableCardPlatform, drawBasePlayerCardPlatform, drawFilledRoundedRect, drawHollowRoundedRect, drawTableCards, drawTableCardSpots, drawCompleteTable, drawCompletePlayerCards} from "./scripts/utils.mjs"; 
 
 class Poker {
     constructor() {
@@ -10,17 +10,17 @@ class Poker {
 
         // Card Deck
         this.cardDeck = new CardDeck(1);
+
+
+        
         this.cardDeck.setCurrentDeck();
         this.cardDeck.shuffleDeck();
         this.cardDeck.dealPlayerCards();
-        console.log(this.cardDeck.playerHand);
 
         this.cardDeck.dealTableCards(4);
 
         drawCompleteTable(this.ctx, this.cardDeck);
-
-        drawBasePlayerCardPlatform(this.ctx);
-        drawPlayerCards(this.ctx, this.cardDeck);
+        drawCompletePlayerCards(this.ctx, this.cardDeck);
     }
 }
 
