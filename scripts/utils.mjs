@@ -24,7 +24,12 @@ function drawFilledRoundedRect(ctx, x, y, width, height, roundedNess, fillColor)
 
 function drawBasePlayerCardPlatform(ctx) {
     drawFilledRoundedRect(ctx, 50, 400, 250, 500, 5, "rgb(39, 176, 39)");
-    drawHollowRoundedRect(ctx, 50, 400, 250, 500, 5, "rgb(30, 130, 30)", 5);
+    drawHollowRoundedRect(ctx, 50, 400, 250, 500, 5, "rgb(24, 82, 24)", 5);
 }
 
-export {drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform};
+function drawBaseTableCardPlatform(ctx) {
+    drawFilledRoundedRect(ctx, 287, 20, 450, 125, 5, "rgb(39, 176, 39)");
+    drawHollowRoundedRect(ctx, 287, 20, 450, 125, 5, "rgb(24, 82, 24)", 5);
+}
+
+export {drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform};

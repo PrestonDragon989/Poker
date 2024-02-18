@@ -18,7 +18,7 @@ html, body {
     max-height: calc(100vh - 14px); /* 100% of viewport height minus 10px for the border */
 
     /* Background Styling */
-    background-color: rgb(69, 188, 90);
+    background-color: rgb(11, 125, 32);
 
     /* Prevent overflow */
     overflow: hidden;
