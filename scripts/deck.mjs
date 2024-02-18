@@ -68,19 +68,19 @@ class CardDeck {
         }
 
         // Total Card deck
-        this.allCards = [ // Diamonds, Spades, Clubs, Hearts
-            [1, "diamond", "card-images/diamond-cards/ace-diamond.png"], [2, "diamond", "card-images/diamond-cards/two-diamond.png"], [3, "diamond", "card-images/diamond-cards/three-diamond.png"], [4, "diamond", "card-images/diamond-cards/four-diamond.png"], [5, "diamond", "card-images/diamond-cards/five-diamond.png"], [6, "diamond", "card-images/diamond-cards/six-diamond.png"], [7, "diamond", "card-images/diamond-cards/seven-diamond.png"], [8, "diamond", "card-images/diamond-cards/eight-diamond.png"], [9, "diamond", "card-images/diamond-cards/nine-diamond.png"], [10, "diamond", "card-images/diamond-cards/ten-diamond.png"], [11, "diamond", "card-images/diamond-cards/jack-diamond.png"], [12, "diamond", "card-images/diamond-cards/queen-diamond.png"], [13, "diamond", "card-images/diamond-cards/king-diamond.png"],
-            [1, "spade", "card-images/spade-cards/ace-spade.png"], [2, "spade", "card-images/spade-cards/two-spade.png"], [3, "spade", "card-images/spade-cards/three-spade.png"], [4, "spade", "card-images/spade-cards/four-spade.png"], [5, "spade", "card-images/spade-cards/five-spade.png"], [6, "spade", "card-images/spade-cards/six-spade.png"], [7, "spade", "card-images/spade-cards/seven-spade.png"], [8, "spade", "card-images/spade-cards/eight-spade.png"], [9, "spade", "card-images/spade-cards/nine-spade.png"], [10, "spade", "card-images/spade-cards/ten-spade.png"], [11, "spade", "card-images/spade-cards/jack-spade.png"], [12, "spade", "card-images/spade-cards/queen-spade.png"], [13, "spade", "card-images/spade-cards/king-spade.png"],
-            [1, "heart", "card-images/heart-cards/ace-heart.png"], [2, "heart", "card-images/heart-cards/two-heart.png"], [3, "heart", "card-images/heart-cards/three-heart.png"], [4, "heart", "card-images/heart-cards/four-heart.png"], [5, "heart", "card-images/heart-cards/five-heart.png"], [6, "heart", "card-images/heart-cards/six-heart.png"], [7, "heart", "card-images/heart-cards/seven-heart.png"], [8, "heart", "card-images/heart-cards/eight-heart.png"], [9, "heart", "card-images/heart-cards/nine-heart.png"], [10, "heart", "card-images/heart-cards/ten-heart.png"], [11, "heart", "card-images/heart-cards/jack-heart.png"], [12, "heart", "card-images/heart-cards/queen-heart.png"], [13, "heart", "card-images/heart-cards/king-heart.png"],
-            [1, "club", "card-images/club-cards/ace-club.png"], [2, "club", "card-images/club-cards/two-club.png"], [3, "club", "card-images/club-cards/three-club.png"], [4, "club", "card-images/club-cards/four-club.png"], [5, "club", "card-images/club-cards/five-club.png"], [6, "club", "card-images/club-cards/six-club.png"], [7, "club", "card-images/club-cards/seven-club.png"], [8, "club", "card-images/club-cards/eight-club.png"], [9, "club", "card-images/club-cards/nine-club.png"], [10, "club", "card-images/club-cards/ten-club.png"], [11, "club", "card-images/club-cards/jack-club.png"], [12, "club", "card-images/club-cards/queen-club.png"], [13, "club", "card-images/club-cards/king-club.png"]
-        ];
+        this.allCards = [
+            [1, "diamond", this.cardSprites.diamonds.ace], [2, "diamond", this.cardSprites.diamonds.two], [3, "diamond", this.cardSprites.diamonds.three], [4, "diamond", this.cardSprites.diamonds.four], [5, "diamond", this.cardSprites.diamonds.five], [6, "diamond", this.cardSprites.diamonds.six], [7, "diamond", this.cardSprites.diamonds.seven], [8, "diamond", this.cardSprites.diamonds.eight], [9, "diamond", this.cardSprites.diamonds.nine], [10, "diamond", this.cardSprites.diamonds.ten], [11, "diamond", this.cardSprites.diamonds.jack], [12, "diamond", this.cardSprites.diamonds.queen], [13, "diamond", this.cardSprites.diamonds.king],
+            [1, "spade", this.cardSprites.spades.ace], [2, "spade", this.cardSprites.spades.two], [3, "spade", this.cardSprites.spades.three], [4, "spade", this.cardSprites.spades.four], [5, "spade", this.cardSprites.spades.five], [6, "spade", this.cardSprites.spades.six], [7, "spade", this.cardSprites.spades.seven], [8, "spade", this.cardSprites.spades.eight], [9, "spade", this.cardSprites.spades.nine], [10, "spade", this.cardSprites.spades.ten], [11, "spade", this.cardSprites.spades.jack], [12, "spade", this.cardSprites.spades.queen], [13, "spade", this.cardSprites.spades.king],
+            [1, "heart", this.cardSprites.hearts.ace], [2, "heart", this.cardSprites.hearts.two], [3, "heart", this.cardSprites.hearts.three], [4, "heart", this.cardSprites.hearts.four], [5, "heart", this.cardSprites.hearts.five], [6, "heart", this.cardSprites.hearts.six], [7, "heart", this.cardSprites.hearts.seven], [8, "heart", this.cardSprites.hearts.eight], [9, "heart", this.cardSprites.hearts.nine], [10, "heart", this.cardSprites.hearts.ten], [11, "heart", this.cardSprites.hearts.jack], [12, "heart", this.cardSprites.hearts.queen], [13, "heart", this.cardSprites.hearts.king],
+            [1, "club", this.cardSprites.clubs.ace], [2, "club", this.cardSprites.clubs.two], [3, "club", this.cardSprites.clubs.three], [4, "club", this.cardSprites.clubs.four], [5, "club", this.cardSprites.clubs.five], [6, "club", this.cardSprites.clubs.six], [7, "club", this.cardSprites.clubs.seven], [8, "club", this.cardSprites.clubs.eight], [9, "club", this.cardSprites.clubs.nine], [10, "club", this.cardSprites.clubs.ten], [11, "club", this.cardSprites.clubs.jack], [12, "club", this.cardSprites.clubs.queen], [13, "club", this.cardSprites.clubs.king]
+        ];        
 
         // Playing Decks
         this.totalPlayingDeck;
         this.currentDeck;
 
         // Player Hands
-        this.playerHands = [];
+        this.playerHand = [];
 
         // Cards currently on the table
         this.tableCards = [];
@@ -91,19 +91,19 @@ class CardDeck {
 
     // Card Management functions (set deck, shuffle deck, deal cards, etc. . .)
     setCurrentDeck() {
+        this.totalPlayingDeck = [];
         for (let i = 0; i < this.size; i++) {
             this.totalPlayingDeck = this.totalPlayingDeck.concat(this.allCards);
         }
+        this.currentDeck = this.totalPlayingDeck;
     }
 
     shuffleDeck() {
         // Reseting player hands
-        this.playerHands.forEach(hand => {
-            hand = [];
-        });
+        this.playerHand = [];
 
         // Reseting deck
-        this.currentDeck = this.totalPlayingDeck.slice();
+        this.currentDeck = this.totalPlayingDeck;
 
         // Shuffling Current Deck
         for (let i = this.currentDeck.length - 1; i > 0; i--) {
@@ -121,11 +121,9 @@ class CardDeck {
 
     // Deal player and table cards
     dealPlayerCards() {
-        this.playerHands.forEach(hand => {
-            for (let i = 0; i < 2; i++) {
-                hand.push(this.dealCard());
-            }
-        });
+        for (let i = 0; i < 2; i++) {
+            this.playerHand.push(this.dealCard());
+        }
     }
 
     dealTableCards(numCards = 1) {

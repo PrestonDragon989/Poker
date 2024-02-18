@@ -22,6 +22,7 @@ function drawFilledRoundedRect(ctx, x, y, width, height, roundedNess, fillColor)
     ctx.fill();
 }
 
+// Drawing Skeleton features of the table
 function drawBasePlayerCardPlatform(ctx) {
     drawFilledRoundedRect(ctx, 50, 400, 250, 500, 5, "rgb(39, 176, 39)");
     drawHollowRoundedRect(ctx, 50, 400, 250, 500, 5, "rgb(24, 82, 24)", 5);
@@ -32,4 +33,13 @@ function drawBaseTableCardPlatform(ctx) {
     drawHollowRoundedRect(ctx, 287, 20, 450, 125, 5, "rgb(24, 82, 24)", 5);
 }
 
-export {drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform};
+// Draw Cards for hands
+function drawPlayerCards(ctx, deck) {
+    let cardOne = deck.playerHand[0];
+    let cardTwo = deck.playerHand[1];
+
+    ctx.drawImage(cardOne[2], 62, 414, 105, 150);
+    ctx.drawImage(cardTwo[2], 182, 414, 105, 150);
+}
+
+export {drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform, drawPlayerCards};
