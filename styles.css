@@ -1,33 +1,34 @@
-body {
+html, body {
     margin: 0;
     padding: 0;
-
+    height: 100%;
     overflow: hidden;
+    background-color: rgb(3, 82, 19);
 }
 
 #poker-container {
-    position: relative;
+    display: grid;
+    place-items: center;
+    height: 100vh; /* Use viewport height */
 }
 
 #poker-canvas {
-    /* Fitting to screen */
-    width: 100vw; 
-    height: 100vh;
+    /* Set maximum dimensions for scaling */
+    max-width: calc(100vw - 14px); /* 100% of viewport width minus 10px for the border */
+    max-height: calc(100vh - 14px); /* 100% of viewport height minus 10px for the border */
 
-    /* Backround Styling */
+    /* Background Styling */
     background-color: rgb(69, 188, 90);
 
-    z-index: 2;
-}
+    /* Prevent overflow */
+    overflow: hidden;
 
-#player-card-canvas {
-    position: fixed;
-    bottom: -1%; /* Adjust this value to cut off a bit of the bottom */
-    left: 7.5%;
-    width: 27.5vw;
-    height: 12vw;
-    border-radius: 4%;
-    border: 2px solid rgb(2, 18, 0);
-    background-color: rgb(20, 175, 0);
-    z-index: 1;
+    /* Maintain aspect ratio */
+    aspect-ratio: 16 / 9;
+
+    /* Include border in dimensions */
+    box-sizing: border-box;
+
+    /* Border Style */
+    border: 7px solid rgb(5, 56, 14);
 }

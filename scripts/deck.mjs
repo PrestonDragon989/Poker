@@ -6,19 +6,19 @@ class CardDeck {
         // Card Sprites
         this.cardSprites = {
             clubs: {
-                ace: new Image(),
-                two: new Image(),
-                three: new Image(),
-                four: new Image(),
-                five: new Image(),
-                six: new Image(),
-                seven: new Image(),
-                eight: new Image(),
-                nine: new Image(),
-                ten: new Image(),
-                jack: new Image(),
-                queen: new Image(),
-                king: new Image()
+                ace: new Image(70, 100),
+                two: new Image(70, 100),
+                three: new Image(70, 100),
+                four: new Image(70, 100),
+                five: new Image(70, 100),
+                six: new Image(70, 100),
+                seven: new Image(70, 100),
+                eight: new Image(70, 100),
+                nine: new Image(70, 100),
+                ten: new Image(70, 100),
+                jack: new Image(70, 100),
+                queen: new Image(70, 100),
+                king: new Image(70, 100)
             },
             spades: {
                 ace: new Image(),
