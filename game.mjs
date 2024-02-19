@@ -1,6 +1,6 @@
 // Importing Deck
 import CardDeck from "./scripts/deck.mjs";
-import {drawHollowRect, drawPlayerCards, drawBaseTableCardPlatform, drawBasePlayerCardPlatform, drawFilledRoundedRect, drawHollowRoundedRect, drawTableCards, drawTableCardSpots, drawCompleteTable, drawCompletePlayerCards} from "./scripts/utils.mjs"; 
+import {drawHollowRect, drawPlayerCards, drawBaseTableCardPlatform, drawBasePlayerCardPlatform, drawFilledRoundedRect, drawHollowRoundedRect, drawTableCards, drawTableCardSpots, drawCompleteTable, drawCompletePlayerCards, goldenOutline} from "./scripts/utils.mjs"; 
 
 class Poker {
     constructor() {

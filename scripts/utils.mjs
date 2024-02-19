@@ -33,7 +33,17 @@ function drawHollowRect(ctx, x, y, width, height, borderColor, borderWidth) {
     ctx.lineWidth = borderWidth;
     ctx.stroke();
 }
+function drawFilledRect(ctx, x, y, width, height, fillColor) {
+    ctx.fillStyle = fillColor;
+    ctx.fillRect(x, y, width, height);
+}
 
+
+// Various other Cosmetic functions
+function goldenOutline(ctx, x, y, width, height) {
+    drawFilledRect(ctx, x, y, width, height, "rgba(222, 213, 35, .4)");
+    drawHollowRect(ctx, x, y, width, height, "rgb(222, 213, 35)", 2.5);
+}
 
 // Drawing Skeleton features of the table
 function drawBasePlayerCardPlatform(ctx) {
@@ -62,7 +72,7 @@ function drawTableCards(ctx, deck) {
 }
 function drawTableCardSpots(ctx) {
     for (let i = 0; i < 5; i++) {
-        drawHollowRect(ctx, 301 + (87 * i), 32, 70, 100, "rgb(7, 79, 20)", 1);
+        drawHollowRect(ctx, 301 + (87 * i), 32, 70, 100, "rgb(7, 79, 20)", 3);
     };
 }
 
@@ -77,4 +87,4 @@ function drawCompletePlayerCards(ctx, deck) {
     drawPlayerCards(ctx, deck);
 }
 
-export {drawCompletePlayerCards, drawCompleteTable, drawTableCardSpots, drawTableCards, drawHollowRect, drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform, drawPlayerCards};
+export {goldenOutline, drawCompletePlayerCards, drawCompleteTable, drawTableCardSpots, drawTableCards, drawHollowRect, drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform, drawPlayerCards};
