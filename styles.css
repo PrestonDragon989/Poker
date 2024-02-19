@@ -32,3 +32,42 @@ html, body {
     /* Border Style */
     border: 7px solid rgb(5, 56, 14);
 }
+
+/* Bet Slider Styles */
+#betting-slider {
+    -webkit-appearance: none; /* Remove default styles */
+    appearance: none;
+    width: 100%;
+    height: 10px; 
+    background: rgb(39, 176, 39); 
+    border-radius: 3px;
+    border: 3px solid rgb(24, 82, 24);
+}
+
+/* Styles for the slider thumb */
+#betting-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styles */
+    appearance: none;
+    width: 15px; 
+    height: 20px; 
+    background: rgb(25, 122, 42);
+    border-radius: 50%; 
+    cursor: pointer; 
+}
+
+/* Betting Button Styles */
+#confirm-bet {
+    background-color: rgb(39, 176, 39);
+    border: 3px solid rgb(24, 82, 24);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#confirm-bet:hover {
+    background-color: rgb(63, 203, 63);
+    transition-duration: 0.6s;
+}
+#confirm-bet:active {
+    background-color: rgb(74, 236, 74);
+    transition-duration: 0.05s;
+}

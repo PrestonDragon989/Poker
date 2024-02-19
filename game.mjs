@@ -21,6 +21,7 @@ class Poker {
 
         drawCompleteTable(this.ctx, this.cardDeck);
         drawCompletePlayerCards(this.ctx, this.cardDeck);
+        goldenOutline(this.ctx, 62, 414, 105, 150);
     }
 }
 
