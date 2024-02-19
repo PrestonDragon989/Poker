@@ -1,5 +1,6 @@
 // Importing Deck
 import CardDeck from "./scripts/deck.mjs";
+import { PokerLogic } from "./scripts/logic.mjs";
 import {drawHollowRect, drawPlayerCards, drawBaseTableCardPlatform, drawBasePlayerCardPlatform, drawFilledRoundedRect, drawHollowRoundedRect, drawTableCards, drawTableCardSpots, drawCompleteTable, drawCompletePlayerCards, goldenOutline, clearScreen} from "./scripts/render.mjs"; 
 
 class Poker {
@@ -41,15 +42,18 @@ class Poker {
         this.currentRaise = 0;
 
         // Game State
-        this.state = "transition";
+        this.state = "player";
 
         this.deck.setCurrentDeck();
         this.deck.shuffleDeck();
         this.deck.dealPlayerCards();
 
-        this.deck.dealTableCards(4);
+        //this.deck.dealTableCards(5);
 
         this.addEventListeners();
+
+        this.pokerLogic = new PokerLogic(this.deck)
+        this.pokerLogic.findValueHand(this.deck.playerHand, this.deck.tableCards);
     }
 
     addEventListeners() {
