@@ -6,15 +6,19 @@ html, body {
     background-color: rgb(3, 82, 19);
 }
 
-#poker-container { 
+#poker-container {
     display: grid;
     place-items: center;
     height: 100vh; /* Use viewport height */
     border: 1px solid red;
+    position: relative; /* Ensure relative positioning for absolute children */
 }
 
 #poker-canvas {
+    /* Setting up location */
     position: relative;
+    z-index: 0;
+
     /* Set maximum dimensions for scaling */
     max-width: calc(100vw - 14px); /* 100% of viewport width minus 10px for the border */
     max-height: calc(100vh - 14px); /* 100% of viewport height minus 10px for the border */
@@ -36,14 +40,25 @@ html, body {
 }
 
 #slider-container {
+    position: absolute;
+    z-index: 1;
+    bottom: 7%; /* Adjust the distance from the bottom as needed */
+    left: 50%;
+    transform: translateX(-50%);
     width: 30%;
     height: 10%;
     display: flex;
     place-items: center;
-    border: 2px solid blue;
+    z-index: 1; /* Ensure the slider is above the canvas */
 }
 
-/* Bet Slider Styles */
+#button-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 5px; /* Adjust as needed */
+}
+
 #betting-slider {
     -webkit-appearance: none; /* Remove default styles */
     appearance: none;
@@ -62,28 +77,12 @@ html, body {
     height: 20px; 
     background: rgb(25, 122, 42);
     border: 2px solid rgb(24, 82, 24);
-    border-radius: 50%; 
+    border-radius: 40%; 
     cursor: pointer;
 }
 
 /* Betting Button Styles */
-#confirm-bet {
-    background-color: rgb(39, 176, 39);
-    border: 3px solid rgb(24, 82, 24);
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-#confirm-bet:hover {
-    background-color: rgb(63, 203, 63);
-    transition-duration: 0.6s;
-}
-#confirm-bet:active {
-    background-color: rgb(74, 236, 74);
-    transition-duration: 0s;
-}
-
-/* Fold Button Styles */
+#confirm-bet,
 #fold-button {
     background-color: rgb(39, 176, 39);
     border: 3px solid rgb(24, 82, 24);
@@ -91,11 +90,29 @@ html, body {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+#confirm-bet:hover,
 #fold-button:hover {
     background-color: rgb(63, 203, 63);
     transition-duration: 0.6s;
 }
+#confirm-bet:active,
 #fold-button:active {
     background-color: rgb(74, 236, 74);
     transition-duration: 0s;
+}
+
+#info-block {
+    position: absolute;
+    top: -80%; /* Adjust the distance from the top as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(39, 176, 39);
+    border: 5px solid rgb(24, 82, 24);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#current-money,
+#money-bet {
+    margin: 5px 0; 
 }
