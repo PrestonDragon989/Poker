@@ -37,7 +37,9 @@ function drawFilledRect(ctx, x, y, width, height, fillColor) {
     ctx.fillStyle = fillColor;
     ctx.fillRect(x, y, width, height);
 }
-
+function clearScreen(ctx, canvas) {
+    drawFilledRect(ctx, 0, 0, canvas.width, canvas.height, "rgb(11, 125, 32)")
+}
 
 // Various other Cosmetic functions
 function goldenOutline(ctx, x, y, width, height) {
@@ -67,7 +69,6 @@ function drawPlayerCards(ctx, deck) {
 function drawTableCards(ctx, deck) {
     for (let i = 0; i < deck.tableCards.length; i++) {
         ctx.drawImage(deck.tableCards[i][2], 301 + (87 * i), 32, 70, 100); // 287, 20, 70, 100
-        console.log(deck.tableCards[i], " Sup ");
     };
 }
 function drawTableCardSpots(ctx) {
@@ -87,4 +88,4 @@ function drawCompletePlayerCards(ctx, deck) {
     drawPlayerCards(ctx, deck);
 }
 
-export {goldenOutline, drawCompletePlayerCards, drawCompleteTable, drawTableCardSpots, drawTableCards, drawHollowRect, drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform, drawPlayerCards};
+export {clearScreen, goldenOutline, drawCompletePlayerCards, drawCompleteTable, drawTableCardSpots, drawTableCards, drawHollowRect, drawHollowRoundedRect, drawFilledRoundedRect, drawBasePlayerCardPlatform, drawBaseTableCardPlatform, drawPlayerCards};

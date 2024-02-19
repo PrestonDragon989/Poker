@@ -4,6 +4,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     background-color: rgb(3, 82, 19);
+    user-select: none;
 }
 
 #poker-container {
@@ -117,5 +118,6 @@ html, body {
 
 #current-money,
 #money-bet {
+    white-space: nowrap;
     margin: 5px 0; 
 }
