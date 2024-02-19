@@ -10,7 +10,6 @@ html, body {
     display: grid;
     place-items: center;
     height: 100vh; /* Use viewport height */
-    border: 1px solid red;
     position: relative; /* Ensure relative positioning for absolute children */
 }
 
@@ -83,7 +82,8 @@ html, body {
 
 /* Betting Button Styles */
 #confirm-bet,
-#fold-button {
+#fold-button,
+#check-button {
     white-space: nowrap; /* Ensure text stays on one line */
     background-color: rgb(39, 176, 39);
     border: 3px solid rgb(24, 82, 24);
@@ -92,12 +92,14 @@ html, body {
     transition: background-color 0.3s ease;
 }
 #confirm-bet:hover,
-#fold-button:hover {
+#fold-button:hover,
+#check-button:hover {
     background-color: rgb(63, 203, 63);
     transition-duration: 0.6s;
 }
 #confirm-bet:active,
-#fold-button:active {
+#fold-button:active,
+#check-button:active {
     background-color: rgb(74, 236, 74);
     transition-duration: 0s;
 }
