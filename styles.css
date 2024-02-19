@@ -84,6 +84,7 @@ html, body {
 /* Betting Button Styles */
 #confirm-bet,
 #fold-button {
+    white-space: nowrap; /* Ensure text stays on one line */
     background-color: rgb(39, 176, 39);
     border: 3px solid rgb(24, 82, 24);
     border-radius: 3px;

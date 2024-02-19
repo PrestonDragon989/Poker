@@ -8,6 +8,11 @@ class Poker {
         this.pokerCanvas = document.getElementById("poker-canvas");
         this.ctx = this.pokerCanvas.getContext("2d");
 
+        this.betSlider = document.getElementById("betting-slider");
+
+        this.currentMoneyBox = document.getElementById("current-money");
+        this.currentMoneyBetBox = document.getElementById("money-bet");
+
         // Card Deck
         this.cardDeck = new CardDeck(1);
         
@@ -19,7 +24,14 @@ class Poker {
 
         drawCompleteTable(this.ctx, this.cardDeck);
         drawCompletePlayerCards(this.ctx, this.cardDeck);
+        this.addSliderListener();
     }
+
+    addSliderListener() {
+        this.betSlider.addEventListener("input", () => {
+            this.currentMoneyBetBox.innerText = "Money Bet: " + this.betSlider.value;
+        });
+    }    
 }
 
 // Starting Game When Page Loads
