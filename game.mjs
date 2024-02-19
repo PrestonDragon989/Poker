@@ -10,8 +10,6 @@ class Poker {
 
         // Card Deck
         this.cardDeck = new CardDeck(1);
-
-
         
         this.cardDeck.setCurrentDeck();
         this.cardDeck.shuffleDeck();
@@ -21,7 +19,6 @@ class Poker {
 
         drawCompleteTable(this.ctx, this.cardDeck);
         drawCompletePlayerCards(this.ctx, this.cardDeck);
-        goldenOutline(this.ctx, 62, 414, 105, 150);
     }
 }
 

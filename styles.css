@@ -6,10 +6,11 @@ html, body {
     background-color: rgb(3, 82, 19);
 }
 
-#poker-container {
+#poker-container { 
     display: grid;
     place-items: center;
     height: 100vh; /* Use viewport height */
+    border: 1px solid red;
 }
 
 #poker-canvas {
@@ -33,6 +34,10 @@ html, body {
     border: 7px solid rgb(5, 56, 14);
 }
 
+#slider-container {
+    border: 2px solid blue;
+}
+
 /* Bet Slider Styles */
 #betting-slider {
     -webkit-appearance: none; /* Remove default styles */
@@ -51,8 +56,9 @@ html, body {
     width: 15px; 
     height: 20px; 
     background: rgb(25, 122, 42);
+    border: 2px solid rgb(24, 82, 24);
     border-radius: 50%; 
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 /* Betting Button Styles */
@@ -69,5 +75,5 @@ html, body {
 }
 #confirm-bet:active {
     background-color: rgb(74, 236, 74);
-    transition-duration: 0.05s;
+    transition-duration: 0s;
 }
