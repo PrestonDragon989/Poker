@@ -62,16 +62,12 @@ class Poker {
         // Adding Button Click Detection
         this.checkButton.addEventListener("click", () => {
             this.buttonPushed.check = true;
-            alert("Check Pressed");
         });
         this.foldButton.addEventListener("click", () => {
             this.buttonPushed.fold = true;
-            alert("Fold Pressed");
         });
         this.raiseButton.addEventListener("click", () => {
             this.buttonPushed.raise = true;
-            console.log("Raised to "+ this.betValue);
-            this.playerMoney -= this.betValue;
         });
     }
 
@@ -98,12 +94,25 @@ class Poker {
     }
 
     update() {
+
+
+        // Updating Money Showm, & Slider
         this.currentMoneyBox.innerText = "Current Money: " + this.playerMoney;
         this.updateSlider();
+
+        // Deciding Motion based on state
         if (this.state === "transition") {
             this.buttonPushed.check = false;
             this.buttonPushed.fold = false;
             this.buttonPushed.raise = false;
+        } else if (this.state === "opponent") {
+            this.buttonPushed.check = false;
+            this.buttonPushed.fold = false;
+            this.buttonPushed.raise = false;
+        } else if (this.state === "player") {
+            if (this.buttonPushed.fold === true) {
+                this.deck.playerHand = [];
+            }
         }
     }
 
