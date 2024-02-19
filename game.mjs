@@ -78,7 +78,7 @@ class Poker {
     // Update Features
     updateSlider() {
         if (this.playerMoney != this.lastMoney) {
-            this.betSlider.min = this.playerMoney + 1;
+            this.betSlider.min = 1;
             this.betSlider.max = this.playerMoney;
             this.betSlider.value = 1;
             this.lastMoney = this.playerMoney;
