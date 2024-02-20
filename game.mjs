@@ -46,14 +46,18 @@ class Poker {
 
         this.deck.setCurrentDeck();
         this.deck.shuffleDeck();
+        
         this.deck.dealPlayerCards();
+        this.deck.dealNpcCards();
+        for (const hand of this.deck.NpcHands) console.log(hand);
 
-        //this.deck.dealTableCards(5);
+        this.deck.dealTableCards(5);
 
         this.addEventListeners();
 
         this.pokerLogic = new PokerLogic(this.deck)
         this.pokerLogic.findValueHand(this.deck.playerHand, this.deck.tableCards);
+        console.log(this.pokerLogic.findWinner(this.deck.playerHand, this.deck.NpcHands, this.deck.tableCards));
     }
 
     addEventListeners() {
@@ -72,6 +76,11 @@ class Poker {
         });
         this.raiseButton.addEventListener("click", () => {
             this.buttonPushed.raise = true;
+        });
+
+        // Blocking right click menu
+        this.pokerCanvas.addEventListener("contextmenu", event => {
+            event.preventDefault();
         });
     }
 
@@ -98,8 +107,6 @@ class Poker {
     }
 
     update() {
-
-
         // Updating Money Showm, & Slider
         this.currentMoneyBox.innerText = "Current Money: " + this.playerMoney;
         this.updateSlider();
@@ -115,7 +122,7 @@ class Poker {
             this.buttonPushed.raise = false;
         } else if (this.state === "player") {
             if (this.buttonPushed.fold === true) {
-                this.deck.playerHand = [];
+
             }
         }
     }

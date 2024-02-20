@@ -31,8 +31,11 @@ class CardDeck {
         this.totalPlayingDeck;
         this.currentDeck;
 
-        // Player Hands
+        // Player Hand
         this.playerHand = [];
+
+        // NPC Hands
+        this.NpcHands = [];
 
         // Cards currently on the table
         this.tableCards = [];
@@ -75,6 +78,16 @@ class CardDeck {
     dealPlayerCards() {
         for (let i = 0; i < 2; i++) {
             this.playerHand.push(this.dealCard());
+        }
+    }
+
+    dealNpcCards() {
+        for (let i = 0; i < 4; i++) {
+            let hand = [];
+            for (let i = 0; i < 2; i++) {
+                hand.push(this.dealCard());
+            }
+            this.NpcHands.push(hand);
         }
     }
 
