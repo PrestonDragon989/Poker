@@ -13,60 +13,55 @@ class PokerLogic {
 
         // Checking for royal flush
         if (new FindHand(hand, tableCards).isRoyalFlush()) {
-            console.log("Found Royal Flush");
             return ["royalFlush", cards];
         } else if (new FindHand(hand, tableCards).isStraightFlush()) {
-            console.log("Found Straight Flush");
             return ["straightFlush", cards];
         } else if (new FindHand(hand, tableCards).isFourOfAKind()) {
-            console.log("Found Four Of Kind");
             return ["fourOfKindFound", cards];
         } else if (new FindHand(hand, tableCards).isFullHouse()) {
-            console.log("Found Full House");
             return ["fullHouse", cards];
         } else if (new FindHand(hand, tableCards).isFlush()) {
-            console.log("Found Flush");
             return ["flush", cards];
         } else if (new FindHand(hand, tableCards).isStraight()) {
-            console.log("Found Straight");
             return ["straight", cards];
         } else if (new FindHand(hand, tableCards).isThreeOfAKind()) {
-            console.log("Found Three Of a Kind");
             return ["threeOfAKind", cards];
         } else if (new FindHand(hand, tableCards).isTwoPair()) {
-            console.log("Found Two Pair");
             return ["twoPair", cards];
         } else if (new FindHand(hand, tableCards).isPair()) {
-            console.log("Found Pair");
             return ["pair", cards];
         } else {
-            console.log("Found High card " + new FindHand(hand, tableCards).findHighCard());
             return ["high", cards, new FindHand(hand, tableCards).findHighCard()];
         }
     }
 
     findBestHands(playerHand, npcHands, tableCards) {
         // Combining Hands
-        const hands = playerHand.concat(npcHands);
+        const hands = [playerHand].concat(npcHands);
+        console.log(hands);
         
         // Setting Hand Ranks
         const handRank = ["royalFlush", "straightFlush", "fourOfAKind", "fullHouse", "flush", "straight", "threeOfAKind", "twoPair", "pair", "high"];
         
         // Getting all hands
         let handTypes = [];
+        let handRanks = [];
         hands.forEach(hand => {
             handTypes.push([this.findValueHand(hand, tableCards)[0], hands.indexOf(hand) + 1]);
-        })
+            handRanks.push(this.findValueHand(hand, tableCards)[0]);
+        });
+
+        console.log(handRanks);
 
         // Getting The highest Hand(s) there
         let bestRank = "high";
-        for (let i = 0; i > handRank.length; i++) {//handRank.forEach(hand => {
-            let hand = handTypes[i];
-            if (hand in handRank && !foundRank) {
-                bestRank = hand;
+        for (var i = 0; i < handRank.length; i++) {
+            console.log(handRank[i]);
+            if (handRanks.includes(handRank[i])) {
+                bestRank = handRank[i];
                 console.log(bestRank);
                 break;
-            } 
+            } console.log(handRank[i]);
         }
 
         // Getting All hands of the best
