@@ -49,9 +49,11 @@ class Poker {
         
         this.deck.dealPlayerCards();
         this.deck.dealNpcCards();
-        for (const hand of this.deck.NpcHands) console.log(hand);
+        console.log(this.deck.tableCards);
+        console.log(this.deck.playerHand);
+        this.deck.NpcHands.forEach(hand => {console.log(hand)});
 
-        this.deck.dealTableCards(5);
+        this.deck.dealTableCards(1);
 
         this.addEventListeners();
 
