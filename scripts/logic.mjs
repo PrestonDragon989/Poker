@@ -51,8 +51,6 @@ class PokerLogic {
             handRanks.push(this.findValueHand(hand, tableCards)[0]);
         });
 
-        console.log(handRanks);
-
         // Getting The highest Hand(s) there
         let bestRank = "high";
         for (var i = 0; i < handRank.length; i++) {
@@ -97,8 +95,11 @@ class PokerLogic {
 
         // Breaking ties if need be
         if (hand[0] === "high") {
+            console.log("UUUuuuuh");
             // Getting Highest Card in table Cards
             const highestTableCard = Math.max(...tableCards.map(cardList => cardList[0]));
+            
+            // Calling everyone even if table card is the highest
             const betterThanTableHands = [];
             bestHands.forEach(hand => {
                 if (hand[0][0] === 1 || hand[1][0] === 1) {
@@ -107,7 +108,24 @@ class PokerLogic {
                 else if (hand[0][0] > highestTableCard || hand[1][0] > highestTableCard) betterThanTableHands.push(bestHands.indexOf(hand));
             })
             if (betterThanTableHands.length === 1) return [betterThanTableHands.length];
-            else if (betterThanTableHands.length === 0) return bestHandNumbers;
+
+            // Comparing everyone to eachother
+            let bestPlayerHands = [];
+            bestHands.forEach(hand => {
+                bestPlayerHands.push([Math.max(...hand.map(cardList => cardList[0])), bestHands.indexOf(hand) + 1]);
+            });
+
+            // Returning Highest card(s) hands
+            const cardNumbersRank = [1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
+            cardNumbersRank.forEach(cardNumber => {
+                if (bestPlayerHands[0].includes(cardNumber)) {
+                    let winningHands = [];
+                    bestPlayerHands.forEach(hands => {
+                        if (hands[0] === cardNumber) winningHands.push(hands[1]);
+                    });
+                    return winningHands;
+                }
+            })
 
         } else if (hand[0] === "pair") {
 
