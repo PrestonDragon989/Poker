@@ -51,10 +51,11 @@ class PokerLogic {
             handRanks.push(this.findValueHand(hand, tableCards)[0]);
         });
 
+        console.log(handRanks);
+
         // Getting The highest Hand(s) there
         let bestRank = "high";
         for (var i = 0; i < handRank.length; i++) {
-            console.log(handRank[i]);
             if (handRanks.includes(handRank[i])) {
                 bestRank = handRank[i];
                 console.log(bestRank);
