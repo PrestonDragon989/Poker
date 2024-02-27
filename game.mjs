@@ -50,7 +50,7 @@ class Poker {
         this.deck.dealPlayerCards();
         this.deck.dealNpcCards();
 
-        this.deck.dealTableCards(1);
+        this.deck.dealTableCards(3);
 
         this.addEventListeners();
 

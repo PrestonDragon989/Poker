@@ -128,7 +128,46 @@ class PokerLogic {
 
             return winningHands;
         } else if (hand === "pair") {
-            console.log("Is pairs")
+            // Getting All Possible Pairs
+            const handPairs = [[1, 1], [13, 13], [12, 12], [11, 11], [10, 10], [9, 9], [8, 8], [7, 7], [6, 6], [5, 5], [4, 4], [3, 3], [2, 2]];
+
+            // Getting the Straight Numbers of each hand
+            let rawHands = [];
+            hands.forEach(hand => {
+                let rawHand = [];
+                hand.forEach(card => {
+                    rawHand.push(card[0]);
+                });
+                tableCards.forEach(card => {
+                    rawHand.push(card[0]);
+                });
+                rawHands.push(rawHand);
+            });
+
+            // Labeling Each Hand
+            let handPairRankings = [];
+            rawHands.forEach(hand => {
+                let pairRank = 0;
+                let nonPairCards = [];
+                handPairs.forEach(pair => {
+                    let count = hand.filter(card => card === pair[0]).length;
+                    if (count === 2) {
+                        pairRank = pair[0];
+                        nonPairCards = hand.filter(card => card !== pair[0]);
+                    }
+                });
+                handPairRankings.push(pairRank);
+            });
+
+            // Checking to see if there is only one good pair
+            let bestPair = Math.max(...handPairRankings);
+
+            // Return All of the best pair(s)
+            let bestHands = [];
+            handPairRankings.forEach(pairRank => {
+                if (pairRank === bestPair) bestHands.push(handPairRankings.indexOf(pairRank) + 1);
+            })
+            return bestHands;
         }
     }
 }
