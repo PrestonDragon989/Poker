@@ -128,46 +128,27 @@ class PokerLogic {
 
             return winningHands;
         } else if (hand === "pair") {
-            // Getting All Possible Pairs
-            const handPairs = [[1, 1], [13, 13], [12, 12], [11, 11], [10, 10], [9, 9], [8, 8], [7, 7], [6, 6], [5, 5], [4, 4], [3, 3], [2, 2]];
-
-            // Getting the Straight Numbers of each hand
-            let rawHands = [];
-            hands.forEach(hand => {
-                let rawHand = [];
+            // Function to find the highest non-pair card in a hand
+            function findHighestNonPairCard(hand, pairValue) {
+                let highestCard = 0;
                 hand.forEach(card => {
-                    rawHand.push(card[0]);
-                });
-                tableCards.forEach(card => {
-                    rawHand.push(card[0]);
-                });
-                rawHands.push(rawHand);
-            });
-
-            // Labeling Each Hand
-            let handPairRankings = [];
-            rawHands.forEach(hand => {
-                let pairRank = 0;
-                let nonPairCards = [];
-                handPairs.forEach(pair => {
-                    let count = hand.filter(card => card === pair[0]).length;
-                    if (count === 2) {
-                        pairRank = pair[0];
-                        nonPairCards = hand.filter(card => card !== pair[0]);
+                    if (card[0] > highestCard && card[0] !== pairValue) {
+                        highestCard = card[0];
                     }
                 });
-                handPairRankings.push(pairRank);
+                return highestCard;
+            }
+
+            // Getting the highest non-pair card in each hand
+            let highestNonPairCards = [];
+            bestHands.forEach(hand => {
+                let pairValue = hand.filter(card => hand.filter(c => c[0] === card[0]).length === 2)[0][0];
+                highestNonPairCards.push(findHighestNonPairCard(hand, pairValue));
             });
 
-            // Checking to see if there is only one good pair
-            let bestPair = Math.max(...handPairRankings);
-
-            // Return All of the best pair(s)
-            let bestHands = [];
-            handPairRankings.forEach(pairRank => {
-                if (pairRank === bestPair) bestHands.push(handPairRankings.indexOf(pairRank) + 1);
-            })
-            return bestHands;
+            // Determine the winner based on the highest non-pair card
+            let winningHandIndex = highestNonPairCards.indexOf(Math.max(...highestNonPairCards));
+            return [bestHandNumbers[winningHandIndex]];
         }
     }
 }
