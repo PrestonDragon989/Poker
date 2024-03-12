@@ -49,7 +49,7 @@ class Poker {
         
         this.deck.dealPlayerCards();
         this.deck.dealNpcCards();
-        console.log(this.deck.tableCards);
+
         console.log(this.deck.playerHand);
         this.deck.NpcHands.forEach(hand => {console.log(hand)});
 

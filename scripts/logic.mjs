@@ -13,41 +13,31 @@ class PokerLogic {
 
         // Checking for royal flush
         if (new FindHand(hand, tableCards).isRoyalFlush()) {
-            console.log("Found Royal Flush");
             return ["royalFlush", cards];
         } else if (new FindHand(hand, tableCards).isStraightFlush()) {
-            console.log("Found Straight Flush");
             return ["straightFlush", cards];
         } else if (new FindHand(hand, tableCards).isFourOfAKind()) {
-            console.log("Found Four Of Kind");
             return ["fourOfKindFound", cards];
         } else if (new FindHand(hand, tableCards).isFullHouse()) {
-            console.log("Found Full House");
             return ["fullHouse", cards];
         } else if (new FindHand(hand, tableCards).isFlush()) {
-            console.log("Found Flush");
             return ["flush", cards];
         } else if (new FindHand(hand, tableCards).isStraight()) {
-            console.log("Found Straight");
             return ["straight", cards];
         } else if (new FindHand(hand, tableCards).isThreeOfAKind()) {
-            console.log("Found Three Of a Kind");
             return ["threeOfAKind", cards];
         } else if (new FindHand(hand, tableCards).isTwoPair()) {
-            console.log("Found Two Pair");
             return ["twoPair", cards];
         } else if (new FindHand(hand, tableCards).isPair()) {
-            console.log("Found Pair");
             return ["pair", cards];
         } else {
-            console.log("Found High card " + new FindHand(hand, tableCards).findHighCard());
             return ["high", cards, new FindHand(hand, tableCards).findHighCard()];
         }
     }
 
     findBestHands(playerHand, npcHands, tableCards) {
         // Combining Hands
-        const hands = playerHand.concat(npcHands);
+        const hands = [playerHand].concat(npcHands);
         
         // Setting Hand Ranks
         const handRank = ["royalFlush", "straightFlush", "fourOfAKind", "fullHouse", "flush", "straight", "threeOfAKind", "twoPair", "pair", "high"];
@@ -58,16 +48,21 @@ class PokerLogic {
             handTypes.push([this.findValueHand(hand, tableCards)[0], hands.indexOf(hand) + 1]);
         })
 
+        console.log(handTypes);
+
         // Getting The highest Hand(s) there
         let bestRank = "high";
-        for (let i = 0; i > handRank.length; i++) {//handRank.forEach(hand => {
-            let hand = handTypes[i];
-            if (hand in handRank && !foundRank) {
-                bestRank = hand;
-                console.log(bestRank);
-                break;
-            } 
-        }
+        let foundRank = false;
+        for (let i = 0; i < handRank.length; i++) {
+            if (!foundRank) {
+                handTypes.forEach(hand => {
+                    if (handRank[i] === hand[0]) {
+                        bestRank = handRank[i];
+                        foundRank = true;
+                    }
+                })
+            }
+        } 
 
         // Getting All hands of the best
         let bestHands = [];
@@ -90,7 +85,7 @@ class PokerLogic {
         let bestHands = [];
 
         // Getting All hands
-        let hands = playerHand.concat(npcHands);
+        let hands = [playerHand].concat(npcHands);
 
         // Setting best hands into a list
         bestHandNumbers.forEach(index => {
@@ -98,24 +93,48 @@ class PokerLogic {
         })
 
         // Finding out what hand it is
-        let hand = new FindHand(hands[0], tableCards);
-
+        let hand = this.findValueHand(hands[bestHandNumbers[0] - 1], tableCards)[0];
         // Breaking ties if need be
-        if (hand[0] === "high") {
-            // Getting Highest Card in table Cards
-            const highestTableCard = Math.max(...tableCards.map(cardList => cardList[0]));
-            const betterThanTableHands = [];
-            bestHands.forEach(hand => {
-                if (hand[0][0] === 1 || hand[1][0] === 1) {
-                    if (highestTableCard >= 2) betterThanTableHands.push(bestHands.indexOf(hand));
-                }
-                else if (hand[0][0] > highestTableCard || hand[1][0] > highestTableCard) betterThanTableHands.push(bestHands.indexOf(hand));
+        if (hand === "high") {
+            // Setting card hiearchy
+            const highCards = [1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
+
+            // Getting Each hands best card
+            let bestCards = [];
+            hands.forEach(hand => {
+                bestCards.push(Math.max(...hand.map(sublist => sublist[0])));
             })
-            if (betterThanTableHands.length === 1) return [betterThanTableHands.length];
-            else if (betterThanTableHands.length === 0) return bestHandNumbers;
 
-        } else if (hand[0] === "pair") {
+            
+        } else if (hand === "pair") {
+            console.log("Pair detection");
+            // Setting up pair rankings
+            const pairs = [[1, 1], [13, 13], [12, 12], [11, 11], [10, 10], [9, 9], [8, 8], [7, 7], [6, 6], [5, 5], [4, 4], [3, 3], [2, 2]];
 
+            // Getting Best Pairs
+            let bestPair = [0, 0]; // [value, handIndex]
+            let pairHands = [];
+            let bestPairs = [];
+
+            bestHandNumbers.forEach(number => {
+                number--;
+                pairHands.push(hands[number]);
+            });
+
+            pairHands.forEach((hand, index) => {
+                let pairValue = 0;
+                pairs.forEach(pair => {
+                    if (hand.includes(pair[0]) && hand.includes(pair[1])) {
+                        if (pair[0] > pairValue) {
+                            pairValue = pair[0];
+                            bestPair = [pairValue, index];
+                        }
+                    }
+                });
+                bestPairs.push([pairValue, pairValue]); // Add the pair to the list
+            });
+
+            return bestPairs;
         }
     }
 }
