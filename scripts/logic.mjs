@@ -123,30 +123,49 @@ class PokerLogic {
             // Setting up pair rankings
             const pairs = [[1, 1], [13, 13], [12, 12], [11, 11], [10, 10], [9, 9], [8, 8], [7, 7], [6, 6], [5, 5], [4, 4], [3, 3], [2, 2]];
 
-            // Getting Best Pairs
-            let bestPair = [0, 0]; // [value, handIndex]
+            // Getting Pairs
             let pairHands = [];
-            let bestPairs = [];
+            hands.forEach(hand => {
+                // Getting Total Cards
+                let totalCards = [];
+                totalCards.push(hand[0][0], hand[0][1]);
+                tableCards.forEach(card => {totalCards.push(card[0])});
 
-            bestHandNumbers.forEach(number => {
-                number--;
-                pairHands.push(hands[number]);
-            });
-
-            pairHands.forEach((hand, index) => {
-                let pairValue = 0;
+                // Setting up stop loop
+                let foundPair = false;
                 pairs.forEach(pair => {
-                    if (hand.includes(pair[0]) && hand.includes(pair[1])) {
-                        if (pair[0] > pairValue) {
-                            pairValue = pair[0];
-                            bestPair = [pairValue, index];
-                        }
+                    if (totalCards.filter(element => element === pair[0]).length > 1 && !foundPair) {
+                        foundPair = true;
+                        pairHands.push(pair[0]);
                     }
-                });
-                bestPairs.push([pairValue, pairValue]); // Add the pair to the list
-            });
+                })
+            })
 
-            return bestPairs;
+            // Getting best pair in pairs
+            let bestPair = Math.max(...pairHands);
+            if (pairHands.includes(1)) bestPair = 1;
+
+            // Checking to see if there is more than one of the same pair
+            if (pairHands.filter(element => element === bestPair).length > 1) {
+                let bestHighCards = [];
+                hands.forEach(hand => {
+                    if (hand[0] == 1 || hand[1] == 1) bestHighCards.push(1);
+                    else bestHighCards.push(Math.max(...hands.map(sublist => sublist[0])))
+                })
+
+                let bestHighCard = Math.max(...bestHighCards);
+                if (bestHighCards.includes(1)) bestHighCard = 1;
+
+                // Checking for second cards
+                if (bestHighCards.filter(element => element === bestHighCard).length > 1) {
+                    let bestSecondHighCards = [];
+                    hands.forEach(hand => {
+                        bestSecondHighCards.push(Math.min(...hands.map(sublist => sublist[0])))
+                    })
+    
+                    let bestHighCard = Math.max(...bestSecondHighCards);
+                }
+            } else {console.log([pairHands.indexOf(bestPair + 1)]); return [pairHands.indexOf(bestPair) + 1];}
         }
     }
 }
