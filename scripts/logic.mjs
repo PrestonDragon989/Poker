@@ -119,6 +119,26 @@ class PokerLogic {
                 return acc;
             }, []);
         } else if (hand === "pair") {
+            function findAllIndexes(arr, value) {
+                // Step 2: Use reduce to build an object with indexes
+                const indexesObj = arr.reduce((acc, curr, index) => {
+                    if (!acc[curr]) {
+                        acc[curr] = [];
+                    }
+                    acc[curr].push(index);
+                    return acc;
+                }, {});
+            
+                // Step 3: Filter the object to only include entries with more than one index
+                const filteredIndexes = Object.entries(indexesObj).filter(([key, indexes]) => {
+                    return indexes.length > 1 && key === value;
+                });
+            
+                // Step 4: Extract the indexes from the filtered entries
+                const allIndexes = filteredIndexes.flatMap(([key, indexes]) => indexes);
+            
+                return allIndexes;
+            }
             console.log("Pair detection");
             // Setting up pair rankings
             const pairs = [[1, 1], [13, 13], [12, 12], [11, 11], [10, 10], [9, 9], [8, 8], [7, 7], [6, 6], [5, 5], [4, 4], [3, 3], [2, 2]];
@@ -147,24 +167,26 @@ class PokerLogic {
 
             // Checking to see if there is more than one of the same pair
             if (pairHands.filter(element => element === bestPair).length > 1) {
-                let bestHighCards = [];
+                // Removing all of the cards that are involved in the pairs
+                let pairlessHands = [];
                 hands.forEach(hand => {
-                    if (hand[0] == 1 || hand[1] == 1) bestHighCards.push(1);
-                    else bestHighCards.push(Math.max(...hands.map(sublist => sublist[0])))
+                    let tempHand = [];
+                    if (hand[0][0] != bestPair) tempHand.push(hand[0]);
+                    if (hand[1][0] != bestPair) tempHand.push(hand[1]);
+                    pairlessHands.push(tempHand);
                 })
 
-                let bestHighCard = Math.max(...bestHighCards);
-                if (bestHighCards.includes(1)) bestHighCard = 1;
+                // Getting all best pairs
+                let bestPairIndexes = [];
+                bestHandNumbers.forEach(number => {
+                    if (hands[number - 1][0] == bestPair || hands[number - 1][1] == bestPair) bestPairIndexes.push(number);
+                })
 
-                // Checking for second cards
-                if (bestHighCards.filter(element => element === bestHighCard).length > 1) {
-                    let bestSecondHighCards = [];
-                    hands.forEach(hand => {
-                        bestSecondHighCards.push(Math.min(...hands.map(sublist => sublist[0])))
-                    })
-    
-                    let bestHighCard = Math.max(...bestSecondHighCards);
+                // Finding out if the pair is on the table
+                if (bestPairIndexes.length < 1) {
+                    
                 }
+
             } else {console.log([pairHands.indexOf(bestPair + 1)]); return [pairHands.indexOf(bestPair) + 1];}
         }
     }
