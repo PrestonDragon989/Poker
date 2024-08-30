@@ -1,9 +1,12 @@
 export default class FindHand {
     constructor(hand, tableCards) {
         this.cards = hand.concat(tableCards);
+        this.hand = hand;
+        this.community_cards = tableCards;
     }
 
     get_hand_rank() {
+        // This simple sends a string of what it is. Yes, I know, it's ugly.
         if (this.royal_flush())
             return "royal_flush";
         else if (this.straight_flush())
@@ -152,16 +155,17 @@ export default class FindHand {
 
     pair() {
         const values = this.cards.map(card => card[0]);
-        const uniqueValues = [...new Set(values)];
-
-        let pairs = 0;
-        for (const value of uniqueValues) {
-            const count = values.filter(v => v === value).length;
-            if (count === 2) {
-                pairs++;
+        let gone_through = [];
+        let found_pair = false;
+        values.forEach((num, i) => {
+            if (gone_through.includes(num)) {
+                if (found_pair == false)
+                    found_pair = true
+                else if (found_pair == true)
+                    return false;
             }
-        }
-
-        return pairs === 1;
+            gone_through.push(num);
+        });
+        return found_pair;
     }
 }
