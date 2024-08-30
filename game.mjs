@@ -1,7 +1,8 @@
 // Importing Deck
 import CardDeck from "./scripts/deck.mjs";
 import { PokerLogic } from "./scripts/logic.mjs";
-import {drawHollowRect, drawPlayerCards, drawBaseTableCardPlatform, drawBasePlayerCardPlatform, drawFilledRoundedRect, drawHollowRoundedRect, drawTableCards, drawTableCardSpots, drawCompleteTable, drawCompletePlayerCards, goldenOutline, clearScreen} from "./scripts/render.mjs"; 
+import { clear_screen, draw_full_player_cards, draw_full_community_cards } from "./scripts/render.mjs";
+import Controller from "./scripts/controller.mjs";
 
 class Poker {
     constructor() {
@@ -12,28 +13,9 @@ class Poker {
         this.pokerCanvas = document.getElementById("poker-canvas");
         this.ctx = this.pokerCanvas.getContext("2d");
 
-        // Button handlers
-        this.checkButton = document.getElementById("check-button");
-        this.raiseButton = document.getElementById("confirm-bet");
-        this.foldButton = document.getElementById("fold-button");
-
-        this.buttonPushed = {
-            check: false,
-            raise: false,
-            fold: false
-        }
-
-        // Bet Slider Handler
-        this.betSlider = document.getElementById("betting-slider");
-        this.betValue = this.betSlider.value;
-
-        // Text Block Handlers
-        this.currentMoneyBox = document.getElementById("current-money");
-        this.currentMoneyBetBox = document.getElementById("money-bet");
-
         // Card Deck
         this.deck = new CardDeck(1);
-        
+
         // Game Variables
         this.playerMoney = 100;
         this.lastMoney = this.playerMoney;
@@ -41,114 +23,67 @@ class Poker {
         this.pot = 0;
         this.currentRaise = 0;
 
-        // Game State
-        this.state = "player";
+        // Setting All the Variables
+        this.controller = new Controller(5, 1);
+        this.controller.generate_players(100);
 
-        this.deck.setCurrentDeck();
-        this.deck.shuffleDeck();
-        
-        this.deck.dealPlayerCards();
-        this.deck.dealNpcCards();
-        console.log(this.deck.tableCards);
-        console.log(this.deck.playerHand);
-        this.deck.NpcHands.forEach(hand => {console.log(hand)});
+        this.deck.set_current_deck();
+        this.deck.shuffle_deck();
+        this.deck.deal_player_cards(this.controller.players);
 
-        this.deck.dealTableCards(3);
+        // DEBUG: This stuff is all debug, take it out at some point
+        console.log("Table: ", this.deck.tableCards);
+        console.log("Players: ", this.controller.players);
+
+        this.deck.deal_community_cards(5);
 
         this.addEventListeners();
 
-        this.pokerLogic = new PokerLogic(this.deck)
-        this.pokerLogic.findValueHand(this.deck.playerHand, this.deck.tableCards);
-        console.log(this.pokerLogic.findWinner(this.deck.playerHand, this.deck.NpcHands, this.deck.tableCards));
+        // NOTE: This is for testing the poker hand logic
+        this.logic = new PokerLogic();
+        this.logic.get_hand_value(this.controller.get_main_player(), this.deck.community_cards);
     }
 
     addEventListeners() {
-        // Adding Slider Detection & Showing
-        this.betSlider.addEventListener("input", () => {
-            this.currentMoneyBetBox.innerText = "Money Bet: " + this.betSlider.value;
-            this.betValue = this.betSlider.value;
-        });
-
-        // Adding Button Click Detection
-        this.checkButton.addEventListener("click", () => {
-            this.buttonPushed.check = true;
-        });
-        this.foldButton.addEventListener("click", () => {
-            this.buttonPushed.fold = true;
-        });
-        this.raiseButton.addEventListener("click", () => {
-            this.buttonPushed.raise = true;
-        });
-
         // Blocking right click menu
         this.pokerCanvas.addEventListener("contextmenu", event => {
             event.preventDefault();
         });
     }
 
-    // Update Features
-    updateSlider() {
-        if (this.playerMoney != this.lastMoney) {
-            this.betSlider.min = 1;
-            this.betSlider.max = this.playerMoney;
-            this.betSlider.value = 1;
-            this.lastMoney = this.playerMoney;
-        }
-    }
-
     // Game Functions
     render() {
         // Clearing Screen
-        clearScreen(this.ctx, this.pokerCanvas);
+        clear_screen(this.ctx, this.pokerCanvas);
 
         // Drawing Player Cards
-        drawCompletePlayerCards(this.ctx, this.deck);
+        draw_full_player_cards(this.ctx, this.controller.get_main_player());
 
         // Draw Table Cards
-        drawCompleteTable(this.ctx, this.deck);
+        draw_full_community_cards(this.ctx, this.deck);
     }
 
     update() {
-        // Updating Money Showm, & Slider
-        this.currentMoneyBox.innerText = "Current Money: " + this.playerMoney;
-        this.updateSlider();
 
-        // Deciding Motion based on state
-        if (this.state === "transition") {
-            this.buttonPushed.check = false;
-            this.buttonPushed.fold = false;
-            this.buttonPushed.raise = false;
-        } else if (this.state === "opponent") {
-            this.buttonPushed.check = false;
-            this.buttonPushed.fold = false;
-            this.buttonPushed.raise = false;
-        } else if (this.state === "player") {
-            if (this.buttonPushed.fold === true) {
-
-            }
-        }
     }
 
     gameLoop(timestamp) {
         // Calculate the elapsed time since the last frame
         const elapsed = timestamp - this.lastFrameTime;
-
-        // Update the last frame time
         this.lastFrameTime = timestamp;
 
-        // Update The Game
+        // Update & Render
         this.update();
-
-        // Render the game
         this.render();
 
-        // Call gameLoop again on the next frame
+        // Recall the game loop
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
 }
 
 // Starting Game When Page Loads
 addEventListener("DOMContentLoaded", function() {
+    console.log("Welcome to Poker! Thanks for checking out the console, by the way! This is an open source project, and can be found here: https://github.com/PrestonDragon989/Poker");
     const poker = new Poker();
     poker.gameLoop();
 });

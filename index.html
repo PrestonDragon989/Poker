@@ -9,27 +9,21 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="shortcut icon" href="card-images/spade-cards/ace-spade.png" type="image/x-icon">
 
-        <!-- Scripst -->
-        <script src="scripts/findHand.mjs" type="module"></script>
+        <!-- Scripts -->
+        <script src="scripts/find_hand.mjs" type="module"></script>
         <script src="scripts/round.mjs" type="module"></script>
         <script src="scripts/logic.mjs" type="module"></script>
         <script src="scripts/render.mjs" type="module"></script>
         <script src="scripts/deck.mjs" type="module"></script>
+        <script src="scripts/player.mjs" type="module"></script>
+        <script src="scripts/controller.mjs" type="module"></script>
+
+        <!-- Main game -->
         <script src="game.mjs" type="module"></script>
     </head>
     <body>
         <div id="poker-container">
             <canvas id="poker-canvas" width="1024" height="576"></canvas>
-            <div id="slider-container">
-                <div id="info-block">
-                    <p id="current-money">Current Money: 100</p>
-                    <p id="money-bet">Money Bet: 1</p>
-                </div>
-                <input type="range" min="1" max="100" value="0" step="1" id="betting-slider">
-                <button id="confirm-bet">Confirm Raise</button>
-                <button id="check-button">Check</button>
-                <button id="fold-button">Fold</button>
-            </div>
-        </div>        
+        </div>
     </body>
 </html>

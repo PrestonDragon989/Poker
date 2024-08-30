@@ -1,53 +1,72 @@
-class FindHand {
+export default class FindHand {
     constructor(hand, tableCards) {
         this.cards = hand.concat(tableCards);
     }
 
-    isRoyalFlush() {
+    get_hand_rank() {
+        if (this.royal_flush())
+            return "royal_flush";
+        else if (this.straight_flush())
+            return "straight_flush";
+        else if (this.four_of_a_kind())
+            return "four_of_a_kind";
+        else if (this.full_house())
+            return "full_house";
+        else if (this.flush())
+            return "flush"
+        else if (this.straight())
+            return "straight";
+        else if (this.three_of_a_kind())
+            return "three_of_a_kind";
+        else if (this.pair())
+            return "pair";
+        else
+            return "high_card";
+    }
+
+    royal_flush() {
         // Setting up predefined variables
         const suits = ['club', 'diamond', 'heart', 'spade'];
-        const royalValues = [10, 11, 12, 13, 1];
+        const royal_values = [10, 11, 12, 13, 1];
 
         // Going through each card to see if it is a flush
         for (const suit of suits) {
-            const royalFlush = royalValues.every(value => this.cards.some(card => card[0] === value && card[1] === suit));
+            const royalFlush = royal_values.every(value => this.cards.some(card => card[0] === value && card[1] === suit));
             if (royalFlush) {
                 return true;
             }
         }
-
-        // Returning False if none found
         return false;
     }
-    
-    isStraightFlush() {
+
+    straight_flush() {
         // Check for a flush
-        const flush = this.isFlush();
+        const flush = this.flush();
 
         if (!flush) {
             return false;
         }
 
         // Check for a straight
-        const straight = this.isStraight();
+        const straight = this.straight();
 
         return straight;
     }
 
-    isFourOfAKind() {
+    four_of_a_kind() {
         const values = this.cards.map(card => card[0]);
-    
+
         for (const value of values) {
             const count = values.filter(v => v === value).length;
             if (count === 4) {
                 return true;
             }
         }
-    
-        return false;
-    }    
 
-    isFullHouse() {
+        return false;
+    }
+
+    full_house() {
         const values = this.cards.map(card => card[0]);
         const uniqueValues = [...new Set(values)];
 
@@ -65,7 +84,7 @@ class FindHand {
         return false;
     }
 
-    isFlush() {
+    flush() {
         const suits = ['club', 'diamond', 'heart', 'spade'];
 
         for (const suit of suits) {
@@ -78,7 +97,7 @@ class FindHand {
         return false;
     }
 
-    isStraight() {
+    straight() {
         const values = this.cards.map(card => card[0]);
         const uniqueValues = [...new Set(values)].sort((a, b) => a - b);
         const straightValues = [
@@ -103,7 +122,7 @@ class FindHand {
         return false;
     }
 
-    isThreeOfAKind() {
+    three_of_a_kind() {
         const values = this.cards.map(card => card[0]);
 
         for (const value of values) {
@@ -116,7 +135,7 @@ class FindHand {
         return false;
     }
 
-    isTwoPair() {
+    two_pair() {
         const values = this.cards.map(card => card[0]);
         const uniqueValues = [...new Set(values)];
 
@@ -131,7 +150,7 @@ class FindHand {
         return pairs === 2;
     }
 
-    isPair() {
+    pair() {
         const values = this.cards.map(card => card[0]);
         const uniqueValues = [...new Set(values)];
 
@@ -145,10 +164,4 @@ class FindHand {
 
         return pairs === 1;
     }
-
-    findHighCard() {
-        const values = this.cards.map(card => card[0]);
-        return Math.max(...values);
-    }
 }
-export default FindHand;
