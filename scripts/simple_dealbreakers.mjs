@@ -1,4 +1,19 @@
 export default class SimpleDealbreakers {
+    constructor() {
+        this.straight_ranks = {
+            1: [1, 2, 3, 4, 5],      // Ace to 5
+            2: [2, 3, 4, 5, 6],      // 2 to 6
+            3: [3, 4, 5, 6, 7],      // 3 to 7
+            4: [4, 5, 6, 7, 8],      // 4 to 8
+            5: [5, 6, 7, 8, 9],      // 5 to 9
+            6: [6, 7, 8, 9, 10],     // 6 to 10
+            7: [7, 8, 9, 10, 11],    // 7 to Jack
+            8: [8, 9, 10, 11, 12],   // 8 to Queen
+            9: [9, 10, 11, 12, 13],  // 9 to King
+            10: [10, 11, 12, 13, 1], // Ace to 10
+        };
+    }
+
     get_high_cards(cards) {
         let true_filtered = [];
         let ace_accounted = [];
@@ -111,5 +126,38 @@ export default class SimpleDealbreakers {
             }
         });
         return winning_index;
+    }
+
+    get_duplicates_value(cards, value) {
+        for (let i = 1; i < 15; i++) {
+            if (cards.filter(v => v === i).length == value) {
+                return i;
+            }
+        }
+    }
+
+    get_straight_rank(cards) {
+        let sorted_cards = [...new Set(cards)].sort((a, b) => a - b);
+        Object.entries(this.straight_ranks).forEach(([rank, straight]) => {
+            if (straight.every(value => sorted_cards.includes(value))) {
+                return rank;
+            }
+        });
+    }
+
+    get_two_pairs_ranks(cards) {
+        let top_two_numbers = [];
+        for (let i = 0; i < 2; i++) {
+            for (let i = 15; i > 0; i--) {
+                if (cards.filter(c => c === i).length == 2) {
+                    if (top_two_numbers.length != 2) {
+                        top_two_numbers.push(i);
+                    } else if (top_two_numbers == 2) {
+                        return top_two_numbers;
+                    }
+                }
+            }
+        }
+        return top_two_numbers;
     }
 }

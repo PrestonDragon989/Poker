@@ -115,7 +115,34 @@ export class PokerLogic {
                 return {"index": [top_index], "rank": "pair", "close": close_win};
             }
         } else if (this.hand_ranks["two_pair"] == tiebreaker_rank_number) {
-            console.log("TWO PAIR");
+            let pair_value_indices = {};
+            top_indices.forEach(index => {
+                const all_cards = controller.playrs[index].cards_to_list().concat(community_cards).map(card => card[0]);
+                pair_value_indices[index] = simple_dealbreaker.get_two_pairs_ranks(all_cards);
+            })
+
+            for (let i = 0; i < 2; i++) {
+                let best_value = 0;
+                let best_index = [];
+                top_indices.forEach(index => {
+                    if (pair_value_indices[index][i] > best_value) {
+                        best_value = pair_value_indices[index][i];
+                        best_index.length = 0;
+                        best_index.push(index)
+                    } else if (pair_value_indices[index][i] == test_value) {
+                        best_index.push(index)
+                    }
+                })
+                if (best_index.length == 1)
+                    return {"index": best_index, "rank": "two_pair", "close": close_win};
+            }
+            let high_card_indices = {};
+            let relative_hard_card_indices = {};
+            top_indices.forEach((index, i) => {
+                high_card_indices[index] = simple_dealbreaker.get_high_cards(controller.players[index].cards_to_list());
+                relative_hard_card_indices[index] = high_card_indices[index]["relative"];
+            });
+            return {"index": simple_dealbreaker.get_highest_card_hand(relative_hard_card_indices), "rank": "high_card", "close": close_win};
 
         } else if (this.hand_ranks["three_of_a_kind"] == tiebreaker_rank_number) {
             let indices_to_raw = {};
@@ -124,7 +151,31 @@ export class PokerLogic {
             });
             return {"index": [simple_dealbreaker.get_three_of_a_kind_dealbreaker_index(indices_to_raw)], "rank": "three_of_a_kind", "close": close_win};
         } else if (this.hand_ranks["straight"] == tiebreaker_rank_number) {
-            console.log("STRAIGHT");
+            let index_straight_ranks = {};
+            top_indices.forEach(index => {
+                const all_cards = controller.players[index].cards_to_list().concat(community_cards).map(card => card[0]);
+                index_straight_ranks[index] = simple_dealbreaker.get_straight_rank(all_cards);
+            });
+            let top_rank = 0;
+            let top_indices = [];
+            top_indices.forEach(index => {
+                if (index_straight_ranks[index] > top_rank) {
+                    top_indices.length = 0;
+                    top_indices.push(index);
+                    top_rank = index_straight_ranks[index];
+                }
+            });
+            if (top_indices.length > 1) {
+                let high_card_indices = {};
+                let relative_hard_card_indices = {};
+                top_indices.forEach((index, i) => {
+                    high_card_indices[index] = simple_dealbreaker.get_high_cards(controller.players[index].cards_to_list());
+                    relative_hard_card_indices[index] = high_card_indices[index]["relative"];
+                });
+                return {"index": simple_dealbreaker.get_highest_card_hand(relative_hard_card_indices), "rank": "high_card", "close": close_win};
+            } else {
+                return {"index": top_indices, "rank": "straight", "close": close_win};
+            }
 
         } else if (this.hand_ranks["flush"] == tiebreaker_rank_number) {
             const on_table = new FindHand([], community_cards);
@@ -162,7 +213,6 @@ export class PokerLogic {
             }
             return {"index": top_flushes, "rank": "flush", "close": close_win};
         } else if (this.hand_ranks["full_house"] == tiebreaker_rank_number) {
-            confirm("FULLL HOUZE BOIIIIZ")
             let indices_to_raw = {};
             top_indices.forEach((index, i) => {
                 indices_to_raw[index] = controller.players[index].cards_to_list().concat(community_cards).map(sub_arr => sub_arr[0])
@@ -186,8 +236,6 @@ export class PokerLogic {
                 return {"index": simple_dealbreaker.get_highest_card_hand(relative_hard_card_indices), "rank": "straight_flush", "close": close_win};
             }
 
-            for (let i = 0; i < 50; i++) console.error("HEHE");
-            confirm("halt");
             const suits = ['club', 'diamond', 'heart', 'spade'];
             let indices_to_flushed = {};
             top_indices.forEach((index, i) => {
