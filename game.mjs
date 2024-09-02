@@ -16,13 +16,6 @@ class Poker {
         // Card Deck
         this.deck = new CardDeck(1);
 
-        // Game Variables
-        this.playerMoney = 100;
-        this.lastMoney = this.playerMoney;
-
-        this.pot = 0;
-        this.currentRaise = 0;
-
         // Setting All the Variables
         this.controller = new Controller(5, 1);
         this.controller.generate_players(100);
@@ -41,7 +34,8 @@ class Poker {
 
         // NOTE: This is for testing the poker hand logic
         this.logic = new PokerLogic();
-        this.logic.get_hand_value(this.controller.get_main_player(), this.deck.community_cards);
+        this.winner_index = this.logic.get_winner_index(this.controller, this.deck.community_cards);
+        console.log("Winner Index: ", this.winner_index);
     }
 
     addEventListeners() {

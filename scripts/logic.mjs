@@ -18,9 +18,37 @@ export class PokerLogic {
         }
     }
 
-    get_hand_value(player, tableCards) {
-        console.log(player);
-        const found_hand = new FindHand(player.cards_to_list(), tableCards)
-        console.log(found_hand.get_hand_rank());
+    get_hand_value(player, community_cards) {
+        const found_hand = new FindHand(player.cards_to_list(), community_cards)
+        return found_hand.get_hand_rank();
+    }
+
+    get_highest_ranks_indices(base_player_ranks) {
+        let highest_rank = 1;
+        let indices = [];
+        Object.entries(base_player_ranks).forEach(([index, rank], i) => {
+            if (this.hand_ranks[rank] > highest_rank) {
+                indices.length = 0;
+                highest_rank = this.hand_ranks[rank];
+            }
+            if (this.hand_ranks[rank] == highest_rank)
+                indices.push(index);
+        })
+        return indices;
+    }
+
+    get_winner_index(controller, community_cards) {
+        let close_win = false;
+        let base_player_ranks = {};
+        Object.entries(controller.players).forEach(([index, player], i) => {
+            base_player_ranks[index] = this.get_hand_value(player, community_cards);
+        });
+        console.log(base_player_ranks);
+        let top_indices = this.get_highest_ranks_indices(base_player_ranks);
+        console.log(top_indices);
+        if (top_indices.length == 1)
+            return {"index": top_indices[0], "rank": base_player_ranks[top_indices[0]], "close": close_win};
+        else
+            close_win = true;
     }
 }
