@@ -1,5 +1,5 @@
 export default class CardDeck {
-    constructor(size) {
+    constructor(size = 1) {
         // Deck size
         this.size = size;
 

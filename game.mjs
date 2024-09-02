@@ -13,24 +13,21 @@ class Poker {
         this.pokerCanvas = document.getElementById("poker-canvas");
         this.ctx = this.pokerCanvas.getContext("2d");
 
+        this.addEventListeners();
+
         // Card Deck
-        this.deck = new CardDeck(1);
+        this.deck = new CardDeck();
 
         // Setting All the Variables
         this.controller = new Controller(5, 1);
         this.controller.generate_players(100);
 
+        // DEBUG: All of this stuff is debug
         this.deck.set_current_deck();
         this.deck.shuffle_deck();
         this.deck.deal_player_cards(this.controller.players);
 
-        // DEBUG: This stuff is all debug, take it out at some point
-        console.log("Table: ", this.deck.tableCards);
-        console.log("Players: ", this.controller.players);
-
         this.deck.deal_community_cards(5);
-
-        this.addEventListeners();
 
         // NOTE: This is for testing the poker hand logic
         this.logic = new PokerLogic();
@@ -43,6 +40,16 @@ class Poker {
         this.pokerCanvas.addEventListener("contextmenu", event => {
             event.preventDefault();
         });
+    }
+
+    // This starts or resets a game (Deck, Players)
+    start(cash) {
+        this.deck = new CardDeck();
+        this.deck.set_current_deck();
+        this.deck.shuffle_deck();
+
+        this.controller = new Controller(5, 1);
+        this.controller.generate_players(cash);
     }
 
     // Game Functions
