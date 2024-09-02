@@ -87,4 +87,5 @@ addEventListener("DOMContentLoaded", function() {
     console.log("Welcome to Poker! Thanks for checking out the console, by the way! This is an open source project, and can be found here: https://github.com/PrestonDragon989/Poker");
     const poker = new Poker();
     poker.gameLoop();
+    console.warn("Game Loop Shut Off. To continue playing, you need to Reload The Page.");
 });
