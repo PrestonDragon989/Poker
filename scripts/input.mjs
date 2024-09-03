@@ -71,6 +71,11 @@ export default class Input {
         canvas.addEventListener("mousedown", (e) => {
             this.down = true;     
             this.button_clicked = false;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+            const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+            this.position = [x, y];
         })
         canvas.addEventListener("mouseup", (e) => {
             this.down = false;
