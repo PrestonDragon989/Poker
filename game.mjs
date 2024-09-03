@@ -103,6 +103,7 @@ addEventListener("DOMContentLoaded", function() {
         }
     }
     if (hasTouchScreen) {
+        this.alert("Touch Screen");
         const canvas = this.document.getElementById("poker-canvas");
         canvas.style.maxHeight = "calc(100vw - 240px);"
     }
