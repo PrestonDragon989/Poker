@@ -118,8 +118,6 @@ export default class FindHand {
         let rank = 1;
         for (const straight of straightValues) {
             if (straight.every(value => uniqueValues.includes(value))) {
-                console.log(rank);
-                
                 return true;
             } rank += 1;
         }

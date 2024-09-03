@@ -154,7 +154,7 @@ export default class SimpleDealbreakers {
 
     get_straight_rank(cards) {
         const sorted_cards = [...new Set(cards)].sort((a, b) => a - b);
-        console.log(sorted_cards);
+        let rank = 1;
         for (const straight of this.straights) {
             if (straight.every(value => sorted_cards.includes(value))) {
                 return rank;

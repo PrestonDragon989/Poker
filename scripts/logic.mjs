@@ -151,7 +151,6 @@ export class PokerLogic {
             });
             return {"index": [simple_dealbreaker.get_three_of_a_kind_dealbreaker_index(indices_to_raw)], "rank": "three_of_a_kind", "close": close_win};
         } else if (this.hand_ranks["straight"] == tiebreaker_rank_number) {
-            alert("HALT")
             let index_straight_ranks = {};
             top_indices.forEach(index => {
                 const all_cards = controller.players[index].cards_to_list().concat(community_cards).map(card => card[0]);
