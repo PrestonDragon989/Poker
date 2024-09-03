@@ -119,4 +119,15 @@ export function draw_full_player_input(ctx, current_cash, betting_amount, bettin
 
     draw_filled_rect(ctx, ...r_pos(165, 85), ...minor_box, "rgb(39, 196, 39)");
     draw_hollow_rect(ctx, ...r_pos(165, 85), ...minor_box, "rgb(24, 82, 24)", 2);
+
+    // Adding the add / subtract signs to the buttons
+    draw_filled_rounded_rect(ctx, ...r_pos(25, 102), 30, 6, 4, "rgb(24, 82, 24)") // Major Sub
+
+    draw_filled_rounded_rect(ctx, ...r_pos(85, 103), 20, 4, 3, "rgb(24, 82, 24)") // Minor Sub
+
+    draw_filled_rounded_rect(ctx, ...r_pos(225, 102), 30, 6, 4, "rgb(24, 82, 24)") // Major Add
+    draw_filled_rounded_rect(ctx, ...r_pos(236.9, 89.5), 6, 30, 4, "rgb(24, 82, 24)")
+
+    draw_filled_rounded_rect(ctx, ...r_pos(175, 103), 20, 4, 3, "rgb(24, 82, 24)") // Minor Add
+    draw_filled_rounded_rect(ctx, ...r_pos(182.5, 95), 4, 20, 3, "rgb(24, 82, 24)")
 }

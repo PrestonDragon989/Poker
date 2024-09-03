@@ -19,8 +19,8 @@ export default class Input {
             "major_add": [615, 480, 50, 50],
             "minor_add": [565, 485, 40, 40],
 
-            "major_sub": null,
-            "minor_sub": null,
+            "major_sub": [415, 480, 50, 50],
+            "minor_sub": [475, 485, 40, 40],
 
             "check": null,
             "fold": null,
@@ -63,14 +63,14 @@ export default class Input {
         })
         canvas.addEventListener("mousemove", (e) => {
             const rect = canvas.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * (canvas.width / rect.width)
-            const y = (e.clientY - rect.top) * (canvas.height / rect.height)
-            this.position = [x, y]
+            const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+            const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+            this.position = [x, y];
         })
     }
 
     get_collision() {
-        Object.entries(this.button_status).forEach(([n, clicked]) => {
+        Object.entries(this.button_status).forEach(([n, _clicked]) => {
             this.button_status[n] = false;
         })
 
