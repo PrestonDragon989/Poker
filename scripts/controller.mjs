@@ -18,4 +18,8 @@ export default class Controller {
     get_main_player() {
         return this.players[this.player_index];
     }
+
+    remove_player(player_index) {
+        delete this.players[player_index];
+    }
 }

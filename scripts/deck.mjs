@@ -64,11 +64,16 @@ export default class CardDeck {
     }
 
     // Deal player and table cards
-    deal_player_cards(players) {
-        for (let i = 0; i < Object.keys(players).length; i++) {
-            players[String(i + 1)].hand[1] = this.deal_card();
-            players[String(i + 1)].hand[2] = this.deal_card();
-        }
+    deal_player_cards(controller) {
+        Object.entries(controller.players).forEach(([index, player]) => {
+            for (let i = 0; i < 2; i++)
+                player.hand[String(i + 1)] = this.deal_card();
+        })
+
+        // for (let i = 0; i < Object.keys(players).length; i++) {
+        //     players[String(i + 1)].hand[1] = this.deal_card();
+        //     players[String(i + 1)].hand[2] = this.deal_card();
+        // }
     }
 
     deal_community_cards(numCards = 1) {

@@ -3,17 +3,22 @@ import CardDeck from "./scripts/deck.mjs";
 import { PokerLogic } from "./scripts/logic.mjs";
 import { clear_screen, draw_full_player_cards, draw_full_community_cards } from "./scripts/render.mjs";
 import Controller from "./scripts/controller.mjs";
+import Input from "./scripts/input.mjs";
 
 class Poker {
     constructor() {
         // Frame Time for FPS
-        this.lastFrameTime = 0;
+        this.last_frame_time = 0;
 
-        // Getting Page Elemants and CTX for drawing
-        this.pokerCanvas = document.getElementById("poker-canvas");
-        this.ctx = this.pokerCanvas.getContext("2d");
+        // Getting Page Elements and CTX for drawing
+        this.poker_canvas = document.getElementById("poker-canvas");
+        this.ctx = this.poker_canvas.getContext("2d");
 
-        this.addEventListeners();
+        // Setting Up Player input
+        this.input = new Input();
+
+        // Setting up Event listeners
+        this.add_event_listeners();
 
         // Card Deck
         this.deck = new CardDeck();
@@ -25,7 +30,7 @@ class Poker {
         // DEBUG: All of this stuff is debug
         this.deck.set_current_deck();
         this.deck.shuffle_deck();
-        this.deck.deal_player_cards(this.controller.players);
+        this.deck.deal_player_cards(this.controller);
 
         this.deck.deal_community_cards(5);
 
@@ -35,11 +40,13 @@ class Poker {
         console.log("Winner Index: ", this.winner_index);
     }
 
-    addEventListeners() {
+    add_event_listeners() {
         // Blocking right click menu
-        this.pokerCanvas.addEventListener("contextmenu", event => {
+        this.poker_canvas.addEventListener("contextmenu", event => {
             event.preventDefault();
         });
+
+        this.input.set_up_event_listeners(this.poker_canvas);
     }
 
     // This starts or resets a game (Deck, Players)
@@ -55,22 +62,22 @@ class Poker {
     // Game Functions
     render() {
         // Clearing Screen
-        clear_screen(this.ctx, this.pokerCanvas);
+        clear_screen(this.ctx, this.poker_canvas);
 
-        // Drawing Player Cards
+        // Drawing Player Cards & Input
         draw_full_player_cards(this.ctx, this.controller.get_main_player());
+        this.input.render(this.ctx);
 
         // Draw Table Cards
         draw_full_community_cards(this.ctx, this.deck);
     }
 
     update() {
-
+        this.input.update(this.controller)
     }
 
-    gameLoop(timestamp) {
+    gameLoop(timestamp) {        
         // Calculate the elapsed time since the last frame
-        const elapsed = timestamp - this.lastFrameTime;
         this.lastFrameTime = timestamp;
 
         // Update & Render
@@ -85,7 +92,7 @@ class Poker {
 // Starting Game When Page Loads
 addEventListener("DOMContentLoaded", function() {
     console.log("Welcome to Poker! Thanks for checking out the console, by the way! This is an open source project, and can be found here: https://github.com/PrestonDragon989/Poker");
+    
     const poker = new Poker();
     poker.gameLoop();
-    console.warn("Game Loop Shut Off. To continue playing, you need to Reload The Page.");
 });

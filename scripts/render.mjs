@@ -87,3 +87,36 @@ export function draw_full_player_cards(ctx, deck) {
     draw_base_main_player_card_platform(ctx);
     draw_main_player_cards(ctx, deck);
 }
+
+export function draw_full_player_input(ctx, current_cash, betting_amount, betting_percent) {
+    const major_box = [50, 50];
+    const minor_box = [40, 40];
+
+    const abs_start = [400, 400];
+    function r_pos(x, y) {
+        return [x + abs_start[0], y + abs_start[1]]
+    }
+
+    // Main Platform
+    draw_filled_rounded_rect(ctx, ...abs_start, 500, 500, 5, "rgb(39, 176, 39)");
+    draw_hollow_rounded_rect(ctx, ...abs_start, 500, 500, 5, "rgb(24, 82, 24)", 5);
+
+    // Drawing betting logic (Bar showing how much, (cash & percent), betting more and less)
+    draw_filled_rounded_rect(ctx, ...r_pos(15, 60), 250, 10, 5, "rgb(11, 125, 32)")
+    draw_filled_rounded_rect(ctx, ...r_pos(15, 60), (250 * betting_percent), 10, 5, "rgb(39, 196, 39)")
+    draw_hollow_rounded_rect(ctx, ...r_pos(15, 60), 250, 10, 5, "rgb(24, 82, 24)", 2)
+
+    // Subtracting
+    draw_filled_rect(ctx, ...r_pos(15, 80), ...major_box, "rgb(39, 196, 39)");
+    draw_hollow_rect(ctx, ...r_pos(15, 80), ...major_box, "rgb(24, 82, 24)", 2)
+
+    draw_filled_rect(ctx, ...r_pos(75, 85), ...minor_box, "rgb(39, 196, 39)");
+    draw_hollow_rect(ctx, ...r_pos(75, 85), ...minor_box, "rgb(24, 82, 24)", 2);
+
+    // Adding
+    draw_filled_rect(ctx, ...r_pos(215, 80), ...major_box, "rgb(39, 196, 39)");
+    draw_hollow_rect(ctx, ...r_pos(215, 80), ...major_box, "rgb(24, 82, 24)", 2)
+
+    draw_filled_rect(ctx, ...r_pos(165, 85), ...minor_box, "rgb(39, 196, 39)");
+    draw_hollow_rect(ctx, ...r_pos(165, 85), ...minor_box, "rgb(24, 82, 24)", 2);
+}

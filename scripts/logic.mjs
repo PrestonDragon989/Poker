@@ -188,9 +188,6 @@ export class PokerLogic {
                 });
                 return {"index": simple_dealbreaker.get_highest_card_hand(relative_hard_card_indices), "rank": "flush", "close": close_win};
             }
-
-            for (let i = 0; i < 50; i++) console.error("HEHE");
-            confirm("halt");
             const suits = ['club', 'diamond', 'heart', 'spade'];
             let indices_to_flushed = {};
             top_indices.forEach((index, i) => {
