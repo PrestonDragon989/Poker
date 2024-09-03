@@ -104,7 +104,6 @@ export default class FindHand {
         const values = this.cards.map(card => card[0]);
         const uniqueValues = [...new Set(values)].sort((a, b) => a - b);
         const straightValues = [
-            [1, 10, 11, 12, 13], // Ace to 10
             [1, 2, 3, 4, 5],     // Ace to 5
             [2, 3, 4, 5, 6],     // 2 to 6
             [3, 4, 5, 6, 7],     // 3 to 7
@@ -114,12 +113,15 @@ export default class FindHand {
             [7, 8, 9, 10, 11],   // 7 to Jack
             [8, 9, 10, 11, 12],  // 8 to Queen
             [9, 10, 11, 12, 13], // 9 to King
+            [1, 10, 11, 12, 13] // 10 to Ace
         ];
-
+        let rank = 1;
         for (const straight of straightValues) {
             if (straight.every(value => uniqueValues.includes(value))) {
+                console.log(rank);
+                
                 return true;
-            }
+            } rank += 1;
         }
 
         return false;

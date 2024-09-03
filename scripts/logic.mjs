@@ -45,6 +45,7 @@ export class PokerLogic {
             base_player_ranks[index] = this.get_hand_value(player, community_cards);
         });
         let top_indices = this.get_highest_ranks_indices(base_player_ranks);
+        
         console.log(controller.players);
         console.log(base_player_ranks);
         console.log(top_indices);
@@ -65,7 +66,6 @@ export class PokerLogic {
             });
             return {"index": simple_dealbreaker.get_highest_card_hand(relative_hard_card_indices), "rank": "high_card", "close": close_win};
         } else if (this.hand_ranks["pair"] == tiebreaker_rank_number) {
-            console.log("PAIR");
             let table_pair_check = new FindHand([], community_cards);
             if (table_pair_check.pair()) {
                 let high_card_indices = {};
@@ -117,7 +117,7 @@ export class PokerLogic {
         } else if (this.hand_ranks["two_pair"] == tiebreaker_rank_number) {
             let pair_value_indices = {};
             top_indices.forEach(index => {
-                const all_cards = controller.playrs[index].cards_to_list().concat(community_cards).map(card => card[0]);
+                const all_cards = controller.players[index].cards_to_list().concat(community_cards).map(card => card[0]);
                 pair_value_indices[index] = simple_dealbreaker.get_two_pairs_ranks(all_cards);
             })
 
@@ -151,30 +151,33 @@ export class PokerLogic {
             });
             return {"index": [simple_dealbreaker.get_three_of_a_kind_dealbreaker_index(indices_to_raw)], "rank": "three_of_a_kind", "close": close_win};
         } else if (this.hand_ranks["straight"] == tiebreaker_rank_number) {
+            alert("HALT")
             let index_straight_ranks = {};
             top_indices.forEach(index => {
                 const all_cards = controller.players[index].cards_to_list().concat(community_cards).map(card => card[0]);
                 index_straight_ranks[index] = simple_dealbreaker.get_straight_rank(all_cards);
             });
+
             let top_rank = 0;
-            let top_indices = [];
-            top_indices.forEach(index => {
-                if (index_straight_ranks[index] > top_rank) {
-                    top_indices.length = 0;
-                    top_indices.push(index);
-                    top_rank = index_straight_ranks[index];
+            let win_indices = [];
+            Object.entries(index_straight_ranks).forEach(([index, rank]) => {
+                if (rank > top_rank) {
+                    win_indices.length = 0;
+                    win_indices.push(index);
+                    top_rank = rank;
                 }
             });
-            if (top_indices.length > 1) {
+            
+            if (win_indices.length > 1) {
                 let high_card_indices = {};
                 let relative_hard_card_indices = {};
-                top_indices.forEach((index, i) => {
+                win_indices.forEach((index, i) => {
                     high_card_indices[index] = simple_dealbreaker.get_high_cards(controller.players[index].cards_to_list());
                     relative_hard_card_indices[index] = high_card_indices[index]["relative"];
                 });
                 return {"index": simple_dealbreaker.get_highest_card_hand(relative_hard_card_indices), "rank": "high_card", "close": close_win};
             } else {
-                return {"index": top_indices, "rank": "straight", "close": close_win};
+                return {"index": win_indices, "rank": "straight", "close": close_win};
             }
 
         } else if (this.hand_ranks["flush"] == tiebreaker_rank_number) {
