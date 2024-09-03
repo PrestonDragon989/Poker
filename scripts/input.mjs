@@ -69,6 +69,7 @@ export default class Input {
 
     set_up_event_listeners(canvas) {
         canvas.addEventListener("mousedown", (e) => {
+            alert()
             this.down = true;     
             this.button_clicked = false;
 
@@ -106,7 +107,6 @@ export default class Input {
                     ) {
                         this.button_clicked = true;
                         this.button_status[n] = true;     
-                        console.log(n);
                     }
                 }
             })
