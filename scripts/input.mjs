@@ -89,11 +89,10 @@ export default class Input {
         });
     
         canvas.addEventListener("touchstart", (e) => {
-            alert("TOUCH SQUEEN");
             this.down = true;     
             this.button_clicked = false;
 
-            const rect = canvas.getBoundingClientRect();
+            const rect = canvas.getBoundingClientRect();            
             const x = (e.clientX - rect.left) * (canvas.width / rect.width);
             const y = (e.clientY - rect.top) * (canvas.height / rect.height);
             this.position = [x, y];
