@@ -8,8 +8,10 @@ export default class Input {
         this.position = null;
 
         // Player info
-        this.player = null
-        this.betting_amount = null
+        this.player = null;
+        this.betting_amount = null;
+
+        this.min_bet = null;
 
         // End Decision
         this.decision = null;
@@ -39,17 +41,30 @@ export default class Input {
         }
     }
 
-    update(controller) {
+    update(controller, min) {
         this.player = controller.get_main_player();
 
         if (this.betting_amount == null)
-            this.betting_amount = this.player.cash * 0.75;
+            this.betting_amount = min;
+
+        this.min_bet = min;
+        if (this.betting_amount < this.min_bet)
+            this.betting_amount = this.min_bet;
 
         this.get_collision();
+
+        if (this.button_status.major_add) 
+            this.betting_amount = this.clamp(this.betting_amount + 10, this.min_bet, this.player.cash);
+        else if (this.button_status.minor_add)
+            this.betting_amount = this.clamp(this.betting_amount + 1, this.min_bet, this.player.cash);
+        else if (this.button_status.major_sub)
+            this.betting_amount = this.clamp(this.betting_amount - 10, this.min_bet, this.player.cash);
+        else if (this.button_status.minor_sub)
+            this.betting_amount = this.clamp(this.betting_amount - 1, this.min_bet, this.player.cash);
     }
 
-    render(ctx) {
-        draw_full_player_input(ctx, this.player.cash, this.betting_amount, this.betting_amount / this.player.cash);
+    render(ctx, round_num, round_state) {
+        draw_full_player_input(ctx, this.player.cash, this.betting_amount, this.betting_amount / this.player.cash, round_num, round_state);
     }
 
     set_up_event_listeners(canvas) {
@@ -91,5 +106,13 @@ export default class Input {
                 }
             })
         }
+    }
+
+    clamp(amount, min, max) {
+        if (amount > max)
+            return max;
+        else if (amount < min) 
+            return min;
+        return amount;
     }
 }

@@ -80,9 +80,9 @@ export default class SimpleDealbreakers {
                     best_indices.length = 0;
                     best_indices.push(index)
                     top = mapped_flushed_indices[index][i];
-                } else if (mapped_flushed_indices[index][i]) {
+                } else if (mapped_flushed_indices[index][i] == top) {
                     best_indices.push(index);
-                }
+                } 
             })
             if (best_indices.length == 1) {
                 console.log("Ended on ", i);

@@ -1,6 +1,5 @@
 // Importing Deck
-import CardDeck from "./scripts/deck.mjs";
-import { PokerLogic } from "./scripts/logic.mjs";
+import Round from "./scripts/round.mjs";
 import { clear_screen, draw_full_player_cards, draw_full_community_cards } from "./scripts/render.mjs";
 import Controller from "./scripts/controller.mjs";
 import Input from "./scripts/input.mjs";
@@ -20,24 +19,16 @@ class Poker {
         // Setting up Event listeners
         this.add_event_listeners();
 
-        // Card Deck
-        this.deck = new CardDeck();
-
         // Setting All the Variables
         this.controller = new Controller(5, 1);
         this.controller.generate_players(100);
 
-        // DEBUG: All of this stuff is debug
-        this.deck.set_current_deck();
-        this.deck.shuffle_deck();
-        this.deck.deal_player_cards(this.controller);
+        // Round
+        this.round = new Round(null);
 
-        this.deck.deal_community_cards(5);
-
-        // NOTE: This is for testing the poker hand logic
-        this.logic = new PokerLogic();
-        this.winner_index = this.logic.get_winner_index(this.controller, this.deck.community_cards);
-        console.log("Winner Index: ", this.winner_index);
+        // Keeping Game state
+        this.total_rounds = 0;
+        this.game_over = false;
     }
 
     add_event_listeners() {
@@ -51,12 +42,11 @@ class Poker {
 
     // This starts or resets a game (Deck, Players)
     start(cash) {
-        this.deck = new CardDeck();
-        this.deck.set_current_deck();
-        this.deck.shuffle_deck();
-
         this.controller = new Controller(5, 1);
         this.controller.generate_players(cash);
+
+        this.round.set_new(this.controller);
+        this.round.start();
     }
 
     // Game Functions
@@ -66,14 +56,14 @@ class Poker {
 
         // Drawing Player Cards & Input
         draw_full_player_cards(this.ctx, this.controller.get_main_player());
-        this.input.render(this.ctx);
+        this.input.render(this.ctx, this.total_rounds, this.round.readable_state);
 
         // Draw Table Cards
-        draw_full_community_cards(this.ctx, this.deck);
+        draw_full_community_cards(this.ctx, this.round.deck);
     }
 
     update() {
-        this.input.update(this.controller)
+        this.input.update(this.controller, this.round.current_betting_amount);
     }
 
     gameLoop(timestamp) {        
@@ -119,6 +109,13 @@ addEventListener("DOMContentLoaded", function() {
 
     console.log("Welcome to Poker! Thanks for checking out the console, by the way! This is an open source project, and can be found here: https://github.com/PrestonDragon989/Poker");
     
+    let cash = parseInt(this.prompt("How much cash do you want everyone to start with:"))
+    if (Number.isNaN(cash)) {
+        cash = 100;
+    }
+    cash = Math.round(cash);
+
     const poker = new Poker();
+    poker.start(cash);
     poker.gameLoop();
 });

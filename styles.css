@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "pixel_font";
+    src: url("pixel_font.ttf");
+}
+
 html, body {
     margin: 0;
     padding: 0;

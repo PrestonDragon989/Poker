@@ -88,13 +88,20 @@ export function draw_full_player_cards(ctx, deck) {
     draw_main_player_cards(ctx, deck);
 }
 
-export function draw_full_player_input(ctx, current_cash, betting_amount, betting_percent) {
+export function draw_full_player_input(ctx, current_cash, betting_amount, betting_percent, round_number, round_state) {
     const major_box = [50, 50];
     const minor_box = [40, 40];
 
     const abs_start = [400, 400];
     function r_pos(x, y) {
         return [x + abs_start[0], y + abs_start[1]]
+    }
+
+    function get_centered_position(text, area_x, area_y, area_width, area_height) {
+        let text_width = ctx.measureText(text).width;
+        let x = area_x + (area_width - text_width) / 2;
+        let y = area_y + (area_height / 2) + (parseInt(ctx.font) / 2);
+        return r_pos(x, y);
     }
 
     // Main Platform
@@ -105,6 +112,17 @@ export function draw_full_player_input(ctx, current_cash, betting_amount, bettin
     draw_filled_rounded_rect(ctx, ...r_pos(15, 60), 250, 10, 5, "rgb(11, 125, 32)")
     draw_filled_rounded_rect(ctx, ...r_pos(15, 60), (250 * betting_percent), 10, 5, "rgb(39, 196, 39)")
     draw_hollow_rounded_rect(ctx, ...r_pos(15, 60), 250, 10, 5, "rgb(24, 82, 24)", 2)
+
+    // Adding Text for betting numbers & Cash
+    let text = `${betting_amount}$ (${betting_amount}%)`;
+    ctx.font = "30px pixel_font";
+    ctx.fillStyle = "rgb(24, 82, 24)";
+    ctx.fillText(text, ...get_centered_position(text, 15, 5, 250, 55));
+    ctx.fillText("- Cash -", ...get_centered_position("- Cash -", 265, 5, 250, 55));
+    ctx.fillText(`${current_cash}$`, ...get_centered_position(`${current_cash}$`, 265, 45, 250, 55));
+
+    let round_info = `${round_state} | ${round_number}`;
+    ctx.fillText(round_info, ...get_centered_position(round_info, 265, 105, 250, 55));
 
     // Subtracting
     draw_filled_rect(ctx, ...r_pos(15, 80), ...major_box, "rgb(39, 196, 39)");
