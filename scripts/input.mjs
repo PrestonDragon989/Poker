@@ -69,7 +69,6 @@ export default class Input {
 
     set_up_event_listeners(canvas) {
         canvas.addEventListener("mousedown", (e) => {
-            alert()
             this.down = true;     
             this.button_clicked = false;
 
@@ -91,7 +90,18 @@ export default class Input {
     
         canvas.addEventListener("touchstart", (e) => {
             alert("TOUCH SQUEEN");
-        })
+            this.down = true;     
+            this.button_clicked = false;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+            const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+            this.position = [x, y];
+        });
+        canvas.addEventListener("touchend", (e) => {
+            this.down = false;
+            this.button_clicked = false;
+        });
     }
 
     get_collision() {
