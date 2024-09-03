@@ -91,6 +91,15 @@ class Poker {
 
 // Starting Game When Page Loads
 addEventListener("DOMContentLoaded", function() {
+    var hasTouchScreen = false;
+    if ("maxTouchPoints" in navigator) {
+        hasTouchScreen = navigator.maxTouchPoints > 0;
+    } 
+    if (hasTouchScreen) {
+        const canvas = this.document.getElementById("poker-canvas");
+        canvas.style.maxHeight = "calc(100vw - 24px);"
+    }
+
     console.log("Welcome to Poker! Thanks for checking out the console, by the way! This is an open source project, and can be found here: https://github.com/PrestonDragon989/Poker");
     
     const poker = new Poker();
