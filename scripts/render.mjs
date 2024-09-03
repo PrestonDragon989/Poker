@@ -114,7 +114,7 @@ export function draw_full_player_input(ctx, current_cash, betting_amount, bettin
     draw_hollow_rounded_rect(ctx, ...r_pos(15, 60), 250, 10, 5, "rgb(24, 82, 24)", 2)
 
     // Adding Text for betting numbers & Cash
-    let text = `${betting_amount}$ (${betting_percent}%)`;
+    let text = `${betting_amount}$ (${Math.ceil(betting_percent * 100)}%)`;
     ctx.font = "30px pixel_font";
     ctx.fillStyle = "rgb(24, 82, 24)";
     ctx.fillText(text, ...get_centered_position(text, 15, 5, 250, 55));
