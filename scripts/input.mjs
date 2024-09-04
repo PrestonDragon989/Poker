@@ -97,12 +97,11 @@ export default class Input {
             const x = (touch.clientX - rect.left) * (canvas.width / rect.width);
             const y = (touch.clientY - rect.top) * (canvas.height / rect.height);
             this.position = [x, y];
-
-            alert(this.position);
         });
         canvas.addEventListener("touchend", (e) => {
             this.down = false;
             this.button_clicked = false;
+            alert("Unclicked");
         });
     }
 
