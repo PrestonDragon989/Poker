@@ -101,7 +101,6 @@ export default class Input {
         canvas.addEventListener("touchend", (e) => {
             this.down = false;
             this.button_clicked = false;
-            alert("Unclicked");
         });
     }
 
