@@ -106,8 +106,10 @@ addEventListener("DOMContentLoaded", function() {
     if (hasTouchScreen) {
         this.alert("Touch Screen");
         const canvas = this.document.getElementById("poker-canvas");
-        canvas.style.maxHeight = "calc(70vw - 240px);";
-        canvas.style.maxWidth = "calc(70vw - 240px);";
+        canvas.style.maxHeight = "calc(5vh - 240px);";
+        canvas.style.maxWidth = "calc(5vw - 240px);";
+		canvas.style.height = "calc(5vh - 240px);";
+        canvas.style.width = "calc(5vw - 240px);";
     }
 
     console.log("Welcome to Poker! Thanks for checking out the console, by the way! This is an open source project, and can be found here: https://github.com/PrestonDragon989/Poker");
