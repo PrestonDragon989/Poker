@@ -115,6 +115,9 @@ export function draw_full_player_input(ctx, current_cash, betting_amount, bettin
 
     // Adding Text for betting numbers & Cash
     let text = `${betting_amount}$ (${Math.ceil(betting_percent * 100)}%)`;
+    if (betting_amount == current_cash)
+        text = "ALL IN!";
+
     ctx.font = "30px pixel_font";
     ctx.fillStyle = "rgb(24, 82, 24)";
     ctx.fillText(text, ...get_centered_position(text, 15, 5, 250, 55));
@@ -137,6 +140,25 @@ export function draw_full_player_input(ctx, current_cash, betting_amount, bettin
 
     draw_filled_rect(ctx, ...r_pos(165, 85), ...minor_box, "rgb(39, 196, 39)");
     draw_hollow_rect(ctx, ...r_pos(165, 85), ...minor_box, "rgb(24, 82, 24)", 2);
+
+    // Check
+    draw_filled_rect(ctx, ...r_pos(15, 140), 75, 30, "rgb(39, 196, 39)");
+    draw_hollow_rect(ctx, ...r_pos(15, 140), 75, 30, "rgb(24, 82, 24)", 2);
+
+    // Bet
+    draw_filled_rect(ctx, ...r_pos(103, 140), 75, 30, "rgb(39, 196, 39)");
+    draw_hollow_rect(ctx, ...r_pos(103, 140), 75, 30, "rgb(24, 82, 24)", 2);
+
+    // Fold
+    draw_filled_rect(ctx, ...r_pos(190, 140), 75, 30, "rgb(39, 196, 39)");
+    draw_hollow_rect(ctx, ...r_pos(190, 140), 75, 30, "rgb(24, 82, 24)", 2);
+
+    // Adding Other Options Text
+    ctx.font = "20px pixel_font";
+    ctx.fillStyle = "rgb(24, 82, 24)";
+    ctx.fillText("Check", ...get_centered_position("Check", 15, 138, 75, 30));
+    ctx.fillText("Bet", ...get_centered_position("Bet", 103, 138, 75, 30));
+    ctx.fillText("Fold", ...get_centered_position("Fold", 190, 138, 75, 30));
 
     // Adding the add / subtract signs to the buttons
     draw_filled_rounded_rect(ctx, ...r_pos(25, 102), 30, 6, 4, "rgb(24, 82, 24)") // Major Sub

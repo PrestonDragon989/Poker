@@ -24,9 +24,9 @@ export default class Input {
             "major_sub": [415, 480, 50, 50],
             "minor_sub": [475, 485, 40, 40],
 
-            "check": null,
-            "fold": null,
-            "bet": null,
+            "check": [415, 540, 75, 30],
+            "bet": [503, 540, 75, 30],
+            "fold": [590, 540, 75, 30],
         }
         this.button_status = {
             "major_add": false,
@@ -36,8 +36,8 @@ export default class Input {
             "minor_sub": false,
 
             "check": false,
-            "fold": false,
             "bet": false,
+            "fold": false,
         }
     }
 
@@ -96,6 +96,9 @@ export default class Input {
             const x = (e.clientX - rect.left) * (canvas.width / rect.width);
             const y = (e.clientY - rect.top) * (canvas.height / rect.height);
             this.position = [x, y];
+
+            alert(this.position);
+            alert(e.clientX);
         });
         canvas.addEventListener("touchend", (e) => {
             this.down = false;
@@ -120,6 +123,8 @@ export default class Input {
                     ) {
                         this.button_clicked = true;
                         this.button_status[n] = true;     
+                        console.log(n);
+                        
                     }
                 }
             })
