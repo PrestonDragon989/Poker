@@ -76,7 +76,6 @@ export default class Input {
             const x = (e.clientX - rect.left) * (canvas.width / rect.width);
             const y = (e.clientY - rect.top) * (canvas.height / rect.height);
             this.position = [x, y];
-            alert("position")
         });
         canvas.addEventListener("mouseup", (e) => {
             this.down = false;
@@ -94,12 +93,12 @@ export default class Input {
             this.button_clicked = false;
 
             const rect = canvas.getBoundingClientRect();            
-            const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-            const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+            const touch = e.touches[0];  // Get the first touch point
+            const x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+            const y = (touch.clientY - rect.top) * (canvas.height / rect.height);
             this.position = [x, y];
 
             alert(this.position);
-            alert(e.clientX);
         });
         canvas.addEventListener("touchend", (e) => {
             this.down = false;
