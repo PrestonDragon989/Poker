@@ -1,6 +1,6 @@
 // Importing Deck
 import Round from "./scripts/round.mjs";
-import { clear_screen, draw_full_player_cards, draw_full_community_cards } from "./scripts/render.mjs";
+import { clear_screen, draw_full_player_cards, draw_full_community_cards, draw_full_pot } from "./scripts/render.mjs";
 import Controller from "./scripts/controller.mjs";
 import Input from "./scripts/input.mjs";
 
@@ -58,8 +58,9 @@ class Poker {
         draw_full_player_cards(this.ctx, this.controller.get_main_player());
         this.input.render(this.ctx, this.total_rounds, this.round.readable_state);
 
-        // Draw Table Cards
+        // Draw Table Cards & Pot
         draw_full_community_cards(this.ctx, this.round.deck);
+        draw_full_pot(this.ctx, this.poker_canvas, this.round);
     }
 
     update() {

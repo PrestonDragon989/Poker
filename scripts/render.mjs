@@ -83,6 +83,14 @@ export function draw_full_community_cards(ctx, deck) {
     draw_community_card_spots(ctx);
     draw_community_cards(ctx, deck);
 }
+
+export function draw_full_pot(ctx, canvas, round) {
+    const base_size = [350, 150];
+    const origin = [(canvas.width / 2) - (base_size[0] / 2), (canvas.height / 2) - (base_size[1] / 2) - 25];
+
+    draw_filled_rounded_rect(ctx, ...origin, ...base_size, 5, "rgb(39, 196, 39)")
+}
+
 export function draw_full_player_cards(ctx, deck) {
     draw_base_main_player_card_platform(ctx);
     draw_main_player_cards(ctx, deck);

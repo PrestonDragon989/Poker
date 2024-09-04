@@ -76,6 +76,7 @@ export default class Input {
             const x = (e.clientX - rect.left) * (canvas.width / rect.width);
             const y = (e.clientY - rect.top) * (canvas.height / rect.height);
             this.position = [x, y];
+            alert("position")
         });
         canvas.addEventListener("mouseup", (e) => {
             this.down = false;

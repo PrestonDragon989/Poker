@@ -32,7 +32,7 @@ html, body {
     background-color: rgb(11, 125, 32);
 
     /* Prevent overflow */
-    overflow: hidden;
+    overflow: auto;
 
     /* Maintain aspect ratio */
     aspect-ratio: 16 / 9;
