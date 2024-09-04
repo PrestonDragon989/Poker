@@ -88,7 +88,8 @@ export function draw_full_pot(ctx, canvas, round) {
     const base_size = [350, 150];
     const origin = [(canvas.width / 2) - (base_size[0] / 2), (canvas.height / 2) - (base_size[1] / 2) - 25];
 
-    draw_filled_rounded_rect(ctx, ...origin, ...base_size, 5, "rgb(39, 196, 39)")
+    draw_filled_rounded_rect(ctx, ...origin, ...base_size, 5, "rgb(39, 176, 39)");
+    draw_hollow_rounded_rect(ctx, ...origin, ...base_size, 5, "rgb(24, 82, 24)", 5);
 }
 
 export function draw_full_player_cards(ctx, deck) {
